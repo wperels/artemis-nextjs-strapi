@@ -1,8 +1,9 @@
 {
-  "name": "surfcamp-frontend",
+  "name": "artemis-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prebuild": "node scripts/wake-strapi.js",
     "dev": "next dev -p 3002",
     "build": "next build",
     "start": "next start -p 3002",
@@ -12,14 +13,24 @@
     "axios": "^1.13.2",
     "next": "^16.0.0",
     "qs": "^6.14.1",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0"
   },
   "devDependencies": {
     "baseline-browser-mapping": "^2.8.32",
-    "eslint": "^8",
-    "eslint-config-next": "13.5.5",
+    "eslint": "^9",
+    "eslint-config-next": "^16.0.0",
     "sass": "^1.93.2"
+  },
+  "overrides": {
+    "lodash": "4.17.23",
+    "semver": "^7.6.0",
+    "tough-cookie": "^4.1.4",
+    "word-wrap": "^1.2.4"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
   }
 }

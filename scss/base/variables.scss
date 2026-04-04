@@ -1,0 +1,31 @@
+:root {
+  --header-height: 16.5rem;
+}
+
+@media (max-width: 75em) {
+  :root {
+    --header-height: 15.5rem;
+  }
+}
+
+@media (max-width: 56.25em) {
+  :root {
+    --header-height: 14.5rem;
+  }
+}
+
+@media (max-width: 23.4375em) {
+  :root {
+    --header-height: 12rem;
+  }
+
+  // Measure/adjust at 360px
+}
+
+$turquoise: #14a998;
+$light-beige: #fffbf4;
+$light-brown: #f1e8d9;
+$brown: #d7c094;
+$orange: #ce822f;
+$beige: #d7c094;
+$black: #000000;

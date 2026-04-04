@@ -1,0 +1,85 @@
+.article-intro {
+  position: relative;
+  padding: 35rem 4.8rem 0;
+  height: 83rem;
+  margin: 0 -4.8rem; // cancels global main padding in base.scss
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 83rem;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center bottom;
+      border-radius: 0 0 20rem 20rem;
+    }
+  }
+
+  &__headline {
+    width: 59rem;
+    margin-bottom: 2.4rem;
+  }
+
+  @include respond(tab-land) {
+    padding: 25rem 2.5rem 0;
+    height: 80vh;
+    margin: 0 -2.5rem; // matches tab-land padding in base.scss
+
+    &__background {
+      height: 80vh;
+    }
+
+    &__headline {
+      width: 100%;
+      font-size: 4.5rem;
+      line-height: 5.5rem;
+    }
+  }
+
+  @include respond(phone) {
+    padding: 20rem 1.5rem 0;
+    height: 75vh;
+    margin: 0 -1.5rem; // matches phone padding in base.scss
+
+    &__background {
+      height: 75vh;
+
+      & img {
+        border-radius: 0 0 10rem 10rem;
+        object-position: center center;
+      }
+    }
+
+    &__headline {
+      width: 100%;
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+    }
+  }
+
+  @include respond(small-phone) {
+    padding: 16rem 1rem 0;
+    height: 65vh;
+    margin: 0 -1rem; // ← was -1.5rem, now matches base.scss 1rem padding
+
+    &__background {
+      height: 55vh;
+
+      & img {
+        border-radius: 0 0 8rem 8rem;
+      }
+    }
+
+    &__headline {
+      font-size: 2.8rem; // was 1.6rem
+      margin-bottom: 0.2rem; // was 0.8rem
+      line-height: 1.0; // tighten at 360px
+    }
+  }
+}

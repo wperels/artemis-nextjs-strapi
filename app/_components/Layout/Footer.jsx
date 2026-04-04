@@ -19,21 +19,21 @@ const Footer = () => {
   ]
 
   const policies = [
-    {
+    /* {
       display: "Imprint.", slug: "/"
+    }, */
+    {
+      display: "Tech Stack.", slug: "/techstack"
     },
     {
-      display: "Terms & Conditions.", slug: "/toc"
-    },
-    {
-      display: "Data Protection.", slug: "/data-protection"
+      display: "About The Developer.", slug: "/about"
     }
   ]
 
   return (
     <footer className="footer">
       <nav className="footer__nav">
-      <Image className="footer__logo" src="/assets/Logo.svg" width={200} height={200} alt="Logo" />
+      <img className="footer__logo" src="/assets/logo.svg" width={200} height={200} alt="Logo" />
         <ul className="footer__links">
               {navItems.map( (item) => (
                 <li key={item.slug}>
@@ -55,7 +55,7 @@ const Footer = () => {
   )
 )}
     </ul>
-      <p className="copy">© Sam’s Surfcamp - all rights reserved</p>
+      <p className="copy">© Wendy Perelstein - all rights reserved</p>
         </div>
   </footer>
   )

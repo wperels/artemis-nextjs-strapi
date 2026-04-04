@@ -1,33 +1,55 @@
-import axios from 'axios';
 import qs from 'qs';
 
+const BASE_URL = process.env.STRAPI_URL || "http://127.0.0.1:1338";
 
-const BASE_URL = process.env.STRAPI_URL || "http://127.0.0.1:1337";
+// Helper to check if URL is already complete (Cloudinary or external)
+export function getStrapiMediaUrl(url) {
+  if (!url) return null;
+  
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  
+  return `${BASE_URL}${url}`;
+}
 
 export async function fetchDataFromStrapi(route) {
   const url = `${BASE_URL}/api/${route}`;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-      try {
-        const response = await axios.get(url)
-        return response.data.data
-      } catch (err) {
-        console.log(err)
-        throw new Error(`Failed to fetch data from: ${url}`);
-      }
+  try {
+    console.log(`Fetching from: ${url}`);
+    const response = await fetch(url, {
+      next: { revalidate: 300 },
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      console.error(`Status: ${response.status}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    return json.data;
+  } catch (err) {
+    console.error(`Failed to fetch data from: ${url}`);
+    console.error(`Error message: ${err.message}`);
+    throw new Error(`Failed to fetch data from: ${url}`);
+  }
 }
 
 export function processInfoBlocks(data) {
   const infoBlocksRaw = data.info_blocks
   return infoBlocksRaw.map( (infoBlock) => ({
-     //key: infoBlock.id,
-    ...infoBlock.attributes,
+      ...infoBlock.attributes,
       id: infoBlock.id,
       showimageRight: infoBlock.showimageRight,
-      imageSrc: BASE_URL + infoBlock.image?.formats?.thumbnail?.url,
+      imageSrc: getStrapiMediaUrl(infoBlock.image?.formats?.thumbnail?.url),
       headline: infoBlock.headline,
       text: infoBlock.text[0].children[0].text,
       button: createInfoBlockButton(infoBlock.button)
-
   }))
 }
 
@@ -35,11 +57,6 @@ export function createInfoBlockButton(buttonData) {
   if (!buttonData) {
     return null
   }
-      /*  { Link element moved to InfoBlock.js } 
-      return (
-          <Link href={`/${buttonData.slug}`} 
-          className= {`btn btn-medium btn--${buttonData.color}`}
-          >{buttonData.text}</Link>) */
    return {
     text: buttonData.text,
     slug: buttonData.slug,
@@ -62,28 +79,24 @@ function processBlogArticle(article) {
   return {
      ...article,
       id: article.id,
-      featuredImage: article.featuredImage?.url ? BASE_URL + article.featuredImage.url : null,
+      featuredImage: article.featuredImage?.url ? getStrapiMediaUrl(article.featuredImage.url) : null,
       articleContent: article.articleContent || []
   }
-
 }
 
 function processImageTextComponent(component) {
-// is this used?
   return {
     ...component.attributes,
     id: component.id,
     paragraph: component.paragraph,
     imageCaption: component.imageCaption,
-    image: BASE_URL + component.image?.formats?.thumbnail?.url,
+    image: getStrapiMediaUrl(component.image?.formats?.thumbnail?.url),
     isLandscape: component.isLandscape,
     imageShowsRight: component.imageShowsRight,
-    articleContent: article.articleContent || []
+    articleContent: component.articleContent || []
   }
 }
 
- // Helper function to render paragraph content
- //extracts the text from each child and joins them together with a newline character.
 export function renderParagraphContent(paragraphArray) {
   if (!paragraphArray || !Array.isArray(paragraphArray)) return '';
   
@@ -95,53 +108,56 @@ export function renderParagraphContent(paragraphArray) {
   }).join('\n\n');
 }
 
-// Format a date string into a human-readable format
 export function formatDate(dateString) {
   const date = new Date(dateString);
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }; 
   return date.toLocaleDateString('en-US', options);
 }
 
-//Extract the URL of an image from the given image data.
 export function extractImageUrl(imageData) {
   if (!imageData || typeof imageData !== 'object') return '';
-  return BASE_URL + (imageData.url || imageData.formats?.thumbnail?.url || '');
+  const url = imageData.url || imageData.formats?.thumbnail?.url || '';
+  return getStrapiMediaUrl(url);
 }
 
-
-//Extract the URL of an image from the given image data.
 export function extractLandscapeImageUrl(imageData) {
   if (!imageData) return '';
   
-  // If imageData is already a string (URL path), prepend BASE_URL
   if (typeof imageData === 'string') {
-    return imageData.startsWith('http') ? imageData : BASE_URL + imageData;
+    return getStrapiMediaUrl(imageData);
   }
   
-  // If imageData is an object, extract the URL
   if (typeof imageData === 'object') {
     const url = imageData.url || imageData.image?.[0]?.url;
-    return url ? BASE_URL + url : '';
+    return getStrapiMediaUrl(url);
   }
   
   return '';
 }
 
 export async function fetchIndividualEvent(documentId) {
+  const url = `${BASE_URL}/api/events/${documentId}`;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+
   try {
-    //console.log('Fetching:', ${BASE_URL}/api/events/${documentId})
-    const response = await axios.get(`${BASE_URL}/api/events/${documentId}`)
-    return processEventData(response.data.data)  // Return just the data portion
+    const response = await fetch(url, {
+      next: { revalidate: 300 },
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+    const json = await response.json();
+    return processEventData(json.data);
   } catch (err) {
-    console.error(`Failed to fetch event ${documentId}:`, err.message)
-    throw err
+    console.error(`Failed to fetch event ${documentId}:`, err.message);
+    throw err;
   }
 }
 
-//article.featuredImage?.url ? BASE_URL + article.featuredImage.url : null,
 export function processEventData(event) {
-
-  // Image is nested in attributes.Image.data.attributes.url in Strapi v5
   const imageUrl = event.attributes?.image?.data?.attributes?.url || 
                    event.image?.url ||
                    null;
@@ -157,8 +173,7 @@ export function processEventData(event) {
       singlePrice: event.singlePrice,
       sharedPrice: event.sharedPrice,
       startingDate: startingDate,
-      //image: BASE_URL + event?.Image?.url
-      image: imageUrl ? BASE_URL + imageUrl : null 
+      image: getStrapiMediaUrl(imageUrl)
   }
 }
 
@@ -172,8 +187,6 @@ export function generateSignupPayload(formData, eventId) {
       data: {
         ...formData,
         event: {
-          // Connect the participant to the event with the provided documentId
-          // This will create a relationship between the participant and the event
           connect: [{ documentId: eventId }]  
         }
       }
@@ -201,16 +214,33 @@ function createEventQuery(eventIdToExclude) {
   };
 
   if (eventIdToExclude) {
-     queryObject.filters.documentId = { 
+    queryObject.filters.documentId = { 
       $ne: eventIdToExclude,
     };
   }
+
   return qs.stringify(queryObject, { encodeValuesOnly: true });
 }
 
-  export async function fetchAllEvents(eventIdToExclude = null) {
+export async function fetchAllEvents(eventIdToExclude = null) {
   const query = createEventQuery(eventIdToExclude);
+  const url = `${BASE_URL}/api/events?${query}`;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-  const response = await axios.get(`${BASE_URL}/api/events?${query}`);
-  return response.data.data.map((event) => processEventData(event));
+  try {
+    const response = await fetch(url, {
+      next: { revalidate: 300 },
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+    const json = await response.json();
+    return json.data.map((event) => processEventData(event));
+  } catch (err) {
+    console.error(`Failed to fetch events:`, err.message);
+    throw err;
+  }
 }

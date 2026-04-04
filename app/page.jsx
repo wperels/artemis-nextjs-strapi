@@ -1,4 +1,3 @@
-import axios from 'axios';
 import HeroSection from './_components/HeroSection'
 import InfoBlock from './_components/InfoBlock'
 import { fetchDataFromStrapi, processInfoBlocks } from '../utils/strapi.utils';
@@ -7,8 +6,8 @@ import BlogPreview  from './_components/Blog/BlogPreview/BlogPreview'
 export default async function Home() {
   const data = await fetchDataFromStrapi("Infoblocks-landing2?populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image")
   // (see strapi.utils.js)
-  //const responseFetch = await fetch('http://localhost:1337/api/Infoblocks-landing2?populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image')
-  //const response = await axios.get('http://127.0.0.1:1337/api/Infoblocks-landing2?populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image')
+  //const responseFetch = await fetch('http://localhost:1338/api/Infoblocks-landing2?populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image')
+  //const response = await axios.get('http://127.0.0.1:1338/api/Infoblocks-landing2?populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image')
    
   const InfoblockData = processInfoBlocks(data)
 
@@ -58,4 +57,4 @@ export default async function Home() {
   )
 }
 
-export const revalidate = 300
+export const revalidate = 300 // was 0

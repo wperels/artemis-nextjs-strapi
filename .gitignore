@@ -15,10 +15,12 @@
 
 # production
 /build
+.cache/
 
 # misc
 .DS_Store
 *.pem
+README_APP_INFO.md
 
 # debug
 npm-debug.log*

@@ -1,5 +1,12 @@
 # Surfcamp Frontend Setup Notes
 
+## Coursera
+The Freelance Stack: Real project with NextJS and Strapi
+https://www.coursera.org/learn/packt-the-freelance-stack-real-project-with-nextjs-and-strapi-usllu/assignment-submission/W8ce6/full-course-practice-assessment
+
+## Figma
+https://www.figma.com/design/N27pbzZuIRUm68cjBKuFxv/Surf-Camp---Sharefile?node-id=1-990
+
 ## Strapi API Configuration
 
 ### Working Populate Query
@@ -189,7 +196,7 @@ export default LandscapeImage;
 
 ## Testing
 When testing image loading:
-1. Check the raw API response: `http://127.0.0.1:1337/api/blog-articles?populate[articleContent][populate]=*&populate=featuredImage`
+1. Check the raw API response: `http://127.0.0.1:1338/api/blog-articles?populate[articleContent][populate]=*&populate=featuredImage`
 2. Verify image property exists and has correct structure
 3. Use console.log to inspect data structure before rendering
 4. Ensure BASE_URL is correctly set in environment variables

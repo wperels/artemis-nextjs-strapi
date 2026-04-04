@@ -2,47 +2,127 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 6rem;
+  padding-top: var(--header-height);
+
 
   &__headline {
     margin-bottom: 3rem;
+    margin-left: 1rem;
+    /* Left margin for extra separation */
   }
+
 
   &__info {
     width: 49%;
+
 
     & .copy:not(:last-of-type) {
       margin-bottom: 1.6rem;
     }
   }
 
+
   &__form {
     width: 45%;
+
 
     & .input {
       width: 100%;
     }
 
+
     & .input__container {
       margin-bottom: 4rem;
     }
+
 
     & .btn {
       margin-top: 2rem;
     }
   }
 
+
   &__name-container {
     display: flex;
     justify-content: space-between;
+
 
     & .input__container {
       width: 48%;
     }
   }
 
+
   &__error {
     color: rgb(120, 2, 2);
     margin-top: 1.6rem;
+  }
+
+
+  @include respond(tab-land) {
+    flex-direction: column;
+    gap: 3rem;
+
+
+    &__info {
+      width: 100%;
+    }
+
+
+    &__form {
+      width: 100%;
+    }
+  }
+
+
+  @include respond(phone) {
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 4rem;
+
+
+    &__headline {
+      margin-bottom: 2rem;
+      margin-left: 0;
+    }
+
+
+    &__info {
+      width: 100%;
+    }
+
+
+    &__form {
+      width: 100%;
+    }
+
+
+    &__name-container {
+      flex-direction: column;
+
+
+      & .input__container {
+        width: 100%;
+      }
+    }
+  }
+
+  @include respond(small-phone) {
+    padding-top: 4rem; // was 9.6rem (96px)
+    margin-bottom: 2.5rem; // was 6rem base
+    gap: 1.5rem;
+
+    &__headline {
+      margin-bottom: 1.5rem;
+    }
+
+    &__name-container {
+      flex-direction: column;
+
+      & .input__container {
+        width: 100%;
+      }
+    }
   }
 
   &__pricing {
@@ -50,28 +130,39 @@
       margin-top: 6rem;
       margin-bottom: 2.4rem;
     }
+
+
     & p:first-of-type {
       margin-bottom: 8px;
     }
   }
 
+
   .intro-text p {
-  margin-bottom: 1.5rem; /* Adjust spacing as needed */
+    margin-bottom: 1.5rem;
+    /* Adjust spacing as needed */
   }
+
 
   .intro-text h3 {
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
   }
+
+
   .intro-text ul {
-    padding-left: 2rem; /* or 1.5rem, adjust to your preference */
+    padding-left: 2rem;
+    /* or 1.5rem, adjust to your preference */
     margin-bottom: 1rem;
     margin-left: 2rem;
-    list-style-position: outside; /* ensures bullets sit outside the text */
+    list-style-position: outside;
+    /* ensures bullets sit outside the text */
   }
+
 
   .intro-text li {
     margin-bottom: 0.5rem;
   }
+
 
 }

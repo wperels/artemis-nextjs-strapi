@@ -3,21 +3,22 @@ import InfoBlock from './../_components/InfoBlock'
 import {fetchDataFromStrapi, processInfoBlocks } from '../../utils/strapi.utils';   
 
 
+export const revalidate = 300; // was 3600
 export default async function Home() {
 
     const data = await fetchDataFromStrapi("Infoblocks-experience2?populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image")
     // (see strapi.utils.js)
-    //const responseFetch = await fetch('http://localhost:1337/api/Infoblocks-experience?populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image')
-    //const response = await axios.get('http://127.0.0.1:1337/api/Infoblocks-experience?populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image')
+    //const responseFetch = await fetch('http://localhost:1338/api/Infoblocks-experience?populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image')
+    //const response = await axios.get('http://127.0.0.1:1338/api/Infoblocks-experience?populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image')
      
     const infoBlockData = processInfoBlocks(data)
 
   //console.log(infoBlockData)
   const heroHeadline = (    
   <>
-    <h1>barrel.</h1>
+    <h1>discover.</h1>
     <h1>your.</h1>
-    <h1>happiness.</h1>
+    <h1>spirit.</h1>
     </>
     )
     
@@ -43,4 +44,3 @@ export default async function Home() {
   )
 }
 
-export const revalidate = 300

@@ -5,6 +5,8 @@ import ArticleComponent from "@/app/_components/Blog/ArticleComponent";
 import ArticleHeadline from "@/app/_components/Blog/ArticleHeadline"
 import FeaturedItems from "@/app/_components/FeaturedItems/FeaturedItems"
 
+export const revalidate = 300; // Revalidate now
+
 export default async function Page({ params }) {
   // the article property is renamed to slug using the ": slug" syntax. 
   // the slug variable will contain the value of "params.article".
@@ -21,9 +23,7 @@ export default async function Page({ params }) {
   if (!article) {
     return <main>Article not found for slug: {slug}</main>;
   }
-/*   const headlines = article.articleContent.filter(
-    (component) => component.__component === "blog-article.headline"
-  ) */
+
 
   return (
     <main>
@@ -58,4 +58,3 @@ export async function generateStaticParams() {
   }
 }
 
-export const revalidate = 300;
