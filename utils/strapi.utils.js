@@ -43,7 +43,7 @@ export async function fetchDataFromStrapi(route) {
 export function processInfoBlocks(data) {
   const infoBlocksRaw = data.info_blocks
   return infoBlocksRaw.map( (infoBlock) => ({
-      ...infoBlock.attributes,
+      ...infoBlock, // ✅ was: ...infoBlock.attributes
       id: infoBlock.id,
       showimageRight: infoBlock.showimageRight,
       imageSrc: getStrapiMediaUrl(infoBlock.image?.formats?.thumbnail?.url),
@@ -65,14 +65,25 @@ export function createInfoBlockButton(buttonData) {
 }
 
 export async function fetchBlogArticles() {
-  const blogData = await fetchDataFromStrapi('blog-articles?populate[articleContent][populate]=*&populate=featuredImage')
-    
-    const processBlogArticles = blogData.map(processBlogArticle)
-      processBlogArticles.sort(
-        (a, z) => new Date(z.publishedAt) - new Date(a.publishedAt)
-      )
-  
-  return processBlogArticles
+  const query = qs.stringify({
+    populate: {
+      articleContent: {
+        populate: '*'
+      },
+      featuredImage: {
+        populate: '*'
+      }
+    }
+  }, { encodeValuesOnly: true });
+
+  const blogData = await fetchDataFromStrapi(`blog-articles?${query}`);
+
+  const processBlogArticles = blogData.map(processBlogArticle);
+  processBlogArticles.sort(
+    (a, z) => new Date(z.publishedAt) - new Date(a.publishedAt)
+  );
+
+  return processBlogArticles;
 }
 
 function processBlogArticle(article) {
@@ -86,7 +97,7 @@ function processBlogArticle(article) {
 
 function processImageTextComponent(component) {
   return {
-    ...component.attributes,
+    ...component, // ✅ was: ...component.attributes
     id: component.id,
     paragraph: component.paragraph,
     imageCaption: component.imageCaption,
@@ -158,23 +169,20 @@ export async function fetchIndividualEvent(documentId) {
 }
 
 export function processEventData(event) {
-  const imageUrl = event.attributes?.image?.data?.attributes?.url || 
-                   event.image?.url ||
-                   null;
-
-  const startingDate = event.attributes?.startingDate || event.startingDate;                 
+  const imageUrl = event.image?.url || null;
+  const startingDate = event.startingDate;
 
   return {
-    ...event.attributes,
-      id: event.id,
-      documentId: event.documentId,
-      name: event.name,
-      description: event.description,
-      singlePrice: event.singlePrice,
-      sharedPrice: event.sharedPrice,
-      startingDate: startingDate,
-      image: getStrapiMediaUrl(imageUrl)
-  }
+    ...event,
+    id: event.id,
+    documentId: event.documentId,
+    name: event.name,
+    description: event.description,
+    singlePrice: event.singlePrice,
+    sharedPrice: event.sharedPrice,
+    startingDate: startingDate,
+    image: getStrapiMediaUrl(imageUrl)
+  };
 }
 
 export function generateSignupPayload(formData, eventId) {
