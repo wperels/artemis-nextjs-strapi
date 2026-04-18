@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const BlogPreviewItem = ({ article }) => {
   return (
-    <Link href={`/blog/${article.slug}`} className="blog-preview__item">
+    <Link href={`/missions/${article.slug}`} className="blog-preview__item">
       <div className="blog-preview__image">
         <img src={article.featuredImage} alt="" />
       </div>

@@ -7,7 +7,7 @@ const FeaturedArticle = ({ article }) => {
   //console.log("Article:",article)
   return (
  <Link 
-    href={`/blog/${article.slug}`}
+    href={`/missions/${article.slug}`}
     className="featured-items__article" >
       <div className="featured-items__article-img">
       <img src={article.featuredImage} alt="" />
