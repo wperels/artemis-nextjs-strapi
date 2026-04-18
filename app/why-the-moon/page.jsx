@@ -14,13 +14,19 @@ export default async function Home() {
     const infoBlockData = processInfoBlocks(data)
 
   //console.log(infoBlockData)
-  const heroHeadline = (    
+/*   const heroHeadline = (    
   <>
     <h1>discover.</h1>
     <h1>your.</h1>
     <h1>spirit.</h1>
     </>
-    )
+    ) */
+
+    const heroHeadline = data?.heroHeadline
+      ? data.heroHeadline.split('|').map((line, i) => (
+          <h1 key={i}>{line}</h1>
+        ))
+      : null
     
      /* not needed after fetching from Strapi 
         const infoBlockData = {
