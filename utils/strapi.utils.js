@@ -5,11 +5,9 @@ const BASE_URL = process.env.STRAPI_URL || "http://127.0.0.1:1338";
 // Helper to check if URL is already complete (Cloudinary or external)
 export function getStrapiMediaUrl(url) {
   if (!url) return null;
-  
   if (url.startsWith('http://') || url.startsWith('https://')) {
     return url;
   }
-  
   return `${BASE_URL}${url}`;
 }
 
@@ -41,47 +39,48 @@ export async function fetchDataFromStrapi(route) {
 }
 
 export function processInfoBlocks(data) {
-  const infoBlocksRaw = data.info_blocks
-  return infoBlocksRaw.map( (infoBlock) => ({
-      ...infoBlock.attributes,
-      id: infoBlock.id,
-      showimageRight: infoBlock.showimageRight,
-      imageSrc: getStrapiMediaUrl(infoBlock.image?.formats?.thumbnail?.url),
-      headline: infoBlock.headline,
-      text: infoBlock.text[0].children[0].text,
-      button: createInfoBlockButton(infoBlock.button)
-  }))
+  if (!data || !data.info_blocks) return [];
+
+  return data.info_blocks.map((infoBlock) => ({
+    id: infoBlock.id,
+    documentId: infoBlock.documentId,
+    headline: infoBlock.headline,
+    text: renderParagraphContent(infoBlock.text),   // ✅ use existing helper, handles empty paras
+    showimageRight: infoBlock.showimageRight,
+    imageSrc: getStrapiMediaUrl(infoBlock.image?.formats?.thumbnail?.url ?? infoBlock.image?.url),
+    button: createInfoBlockButton(infoBlock.button),
+  }));
 }
 
 export function createInfoBlockButton(buttonData) {
-  if (!buttonData) {
-    return null
-  }
-   return {
+  if (!buttonData) return null;
+  return {
     text: buttonData.text,
     slug: buttonData.slug,
-    color: buttonData.color
-  }
+    color: buttonData.color,
+  };
 }
 
 export async function fetchBlogArticles() {
-  const blogData = await fetchDataFromStrapi('blog-articles?populate[articleContent][populate]=*&populate=featuredImage')
-    
-    const processBlogArticles = blogData.map(processBlogArticle)
-      processBlogArticles.sort(
-        (a, z) => new Date(z.publishedAt) - new Date(a.publishedAt)
-      )
-  
-  return processBlogArticles
+  const blogData = await fetchDataFromStrapi('blog-articles?populate=featuredImage');
+
+  const processBlogArticles = blogData.map(processBlogArticle);
+  processBlogArticles.sort(
+    (a, z) => new Date(z.publishedAt) - new Date(a.publishedAt)
+  );
+
+  return processBlogArticles;
 }
 
 function processBlogArticle(article) {
   return {
-     ...article,
-      id: article.id,
-      featuredImage: article.featuredImage?.url ? getStrapiMediaUrl(article.featuredImage.url) : null,
-      articleContent: article.articleContent || []
-  }
+    ...article,
+    id: article.id,
+    featuredImage: article.featuredImage?.url
+      ? getStrapiMediaUrl(article.featuredImage.url)
+      : null,
+    articleContent: article.articleContent || [],
+  };
 }
 
 function processImageTextComponent(component) {
@@ -93,24 +92,27 @@ function processImageTextComponent(component) {
     image: getStrapiMediaUrl(component.image?.formats?.thumbnail?.url),
     isLandscape: component.isLandscape,
     imageShowsRight: component.imageShowsRight,
-    articleContent: component.articleContent || []
-  }
+    articleContent: component.articleContent || [],
+  };
 }
 
 export function renderParagraphContent(paragraphArray) {
   if (!paragraphArray || !Array.isArray(paragraphArray)) return '';
-  
-  return paragraphArray.map((para) => {
-    if (para.type === 'paragraph' && para.children) {
-      return para.children.map(child => child.text).join('');
-    }
-    return '';
-  }).join('\n\n');
+
+  return paragraphArray
+    .map((para) => {
+      if (para.type === 'paragraph' && para.children) {
+        return para.children.map((child) => child.text).join('');
+      }
+      return '';
+    })
+    .filter(Boolean)               // ✅ drop empty paragraph strings
+    .join('\n\n');
 }
 
 export function formatDate(dateString) {
   const date = new Date(dateString);
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }; 
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   return date.toLocaleDateString('en-US', options);
 }
 
@@ -122,16 +124,11 @@ export function extractImageUrl(imageData) {
 
 export function extractLandscapeImageUrl(imageData) {
   if (!imageData) return '';
-  
-  if (typeof imageData === 'string') {
-    return getStrapiMediaUrl(imageData);
-  }
-  
+  if (typeof imageData === 'string') return getStrapiMediaUrl(imageData);
   if (typeof imageData === 'object') {
     const url = imageData.url || imageData.image?.[0]?.url;
     return getStrapiMediaUrl(url);
   }
-  
   return '';
 }
 
@@ -158,65 +155,57 @@ export async function fetchIndividualEvent(documentId) {
 }
 
 export function processEventData(event) {
-  const imageUrl = event.attributes?.image?.data?.attributes?.url || 
-                   event.image?.url ||
-                   null;
+  const imageUrl =
+    event.attributes?.image?.data?.attributes?.url ||
+    event.image?.url ||
+    null;
 
-  const startingDate = event.attributes?.startingDate || event.startingDate;                 
+  const startingDate = event.attributes?.startingDate || event.startingDate;
 
   return {
     ...event.attributes,
-      id: event.id,
-      documentId: event.documentId,
-      name: event.name,
-      description: event.description,
-      singlePrice: event.singlePrice,
-      sharedPrice: event.sharedPrice,
-      startingDate: startingDate,
-      image: getStrapiMediaUrl(imageUrl)
-  }
+    id: event.id,
+    documentId: event.documentId,
+    name: event.name,
+    description: event.description,
+    singlePrice: event.singlePrice,
+    sharedPrice: event.sharedPrice,
+    startingDate: startingDate,
+    image: getStrapiMediaUrl(imageUrl),
+  };
 }
 
 export function generateSignupPayload(formData, eventId) {
   if (!eventId) {
     return {
-      data: {...formData, isGeneralInterest: true}
-      } 
-    }  else {
+      data: { ...formData, isGeneralInterest: true },
+    };
+  } else {
     return {
       data: {
         ...formData,
         event: {
-          connect: [{ documentId: eventId }]  
-        }
-      }
-    }
+          connect: [{ documentId: eventId }],
+        },
+      },
+    };
   }
 }
 
 function createEventQuery(eventIdToExclude) {
   const queryObject = {
-    pagination: {
-      start: 0,
-      limit: 12,
-    },
-    sort: ["startingDate:asc"],
+    pagination: { start: 0, limit: 12 },
+    sort: ['startingDate:asc'],
     filters: {
-      startingDate: {
-        $gt: new Date(),
-      },
+      startingDate: { $gt: new Date() },
     },
     populate: {
-      image: {
-        populate: "*",
-      },
+      image: { populate: '*' },
     },
   };
 
   if (eventIdToExclude) {
-    queryObject.filters.documentId = { 
-      $ne: eventIdToExclude,
-    };
+    queryObject.filters.documentId = { $ne: eventIdToExclude };
   }
 
   return qs.stringify(queryObject, { encodeValuesOnly: true });
