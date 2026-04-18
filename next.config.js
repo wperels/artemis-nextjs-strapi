@@ -1,4 +1,3 @@
-// surfcamp-frontend/next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -6,17 +5,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
+        pathname: '/**',
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/strapi/:path*',
-        destination: `${process.env.STRAPI_URL}/api/:path*`,
-      },
-    ];
-  },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

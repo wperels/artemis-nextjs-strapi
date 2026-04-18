@@ -23,12 +23,12 @@
     "eslint-config-next": "^16.1.0",
     "sass": "^1.93.2"
   },
-"overrides": {
-  "lodash": "4.17.23",
-  "semver": "^7.6.0",
-  "tough-cookie": "^4.1.4",
-  "word-wrap": "^1.2.4"
-},
+  "overrides": {
+    "lodash": "4.17.23",
+    "semver": "^7.6.0",
+    "tough-cookie": "^4.1.4",
+    "word-wrap": "^1.2.4"
+  },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
