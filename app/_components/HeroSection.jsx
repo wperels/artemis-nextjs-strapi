@@ -1,24 +1,31 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from 'next/link'
+import Image from 'next/image'
 
-const HeroSection = ({ imgSrc, headline, theme="turquoise" }) => {
+const HeroSection = ({ imgSrc, heroAlt, headline, theme = "turquoise" }) => {
   return (
     <section className="hero">
       <div className="hero__background">
-        <img src= {imgSrc || "/assets/hero-home.png"} width={700} height={500} alt="Hero"></img>
+        {imgSrc && (
+          <Image
+            src={imgSrc}
+            fill
+            alt={heroAlt || "Artemis hero"}
+            priority
+          />
+        )}
       </div>
-      <div className= {`hero__headline  hero__headline--${theme}`}>
-        {headline || <h1>headline missing </h1>}
+      <div className={`hero__headline hero__headline--${theme}`}>
+        {headline || <h1>headline missing</h1>}
       </div>
-      <button className={ `btn  btn--medium btn--${theme}` }>
-        <Link href="/events">Book Now</Link>
-      </button>
-        <img className={`hero__logo hero__logo--${theme}`} src= {"/assets/logo.svg"} width={100} height={500} alt="Hero"></img>
+      <img
+          className={`hero__logo hero__logo--${theme}`}
+          src="/assets/Artemis_program.svg"
+          width={120}
+          height={111}
+          alt="NASA Artemis program logo"
+        />
     </section>
-
   )
 }
-
-
 
 export default HeroSection

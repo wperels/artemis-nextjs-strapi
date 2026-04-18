@@ -3,20 +3,12 @@ import Link from 'next/link';
 
 
 const Footer = () => {
-  const navItems = [
-    {
-      display: "the camp.", slug: "/"
-    },
-    {
-      display: "the experience.", slug: "/experience"
-    },
-    {
-      display: "the blog.", slug: "/blog"
-    },
-    {
-      display: "the events.", slug: "/events"
-    }
-  ]
+const navItems = [
+  { display: "Launch System", slug: "/" },
+  { display: "Why the Moon", slug: "/why-the-moon" },
+  { display: "The Missions", slug: "/missions" },
+  { display: "NASA's Newsletter", slug: "/newsletter" }, 
+]
 
   const policies = [
     /* {

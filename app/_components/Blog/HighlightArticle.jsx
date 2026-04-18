@@ -13,7 +13,7 @@ const HighlightArticle = ( {data} ) => {
     <div className="highlight-article__info">
       <h3>{headline}</h3>
       <p className="copy">{excerpt}</p>
-      <Link className="btn btn--turquoise btn--medium" href={`/blog/${slug}`}>
+      <Link className="btn btn--turquoise btn--medium" href={`/missions/${slug}`}>
         Read More
       </Link>
     </div>
