@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "prebuild": "node scripts/wake-strapi.js",
-    "kill": "npx kill-port 3003",
-    "dev": "npx kill-port 3003 && next dev -p 3003",
+    "dev": "next dev -p 3003",
     "build": "next build",
     "start": "next start -p 3003",
     "lint": "next lint"
