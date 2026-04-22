@@ -6,7 +6,8 @@ import BlogPreview from './_components/Blog/BlogPreview/BlogPreview'
 export default async function Home() {
 
   const data = await fetchDataFromStrapi(
-    "infoblocks-landing2?populate[heroImage]=true&populate[info_blocks][populate]=button"
+    //"infoblocks-landing2?populate[heroImage]=true&populate[info_blocks][populate]=button"
+     "infoblocks-landing2?populate[heroImage]=true&populate[info_blocks][populate][0]=image&populate[info_blocks][populate][1]=button"
   )
 
   const InfoblockData = processInfoBlocks(data)

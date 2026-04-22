@@ -47,7 +47,12 @@ export function processInfoBlocks(data) {
     headline: infoBlock.headline,
     text: renderParagraphContent(infoBlock.text),   // ✅ use existing helper, handles empty paras
     showimageRight: infoBlock.showimageRight,
-    imageSrc: getStrapiMediaUrl(infoBlock.image?.formats?.thumbnail?.url ?? infoBlock.image?.url),
+    //imageSrc: getStrapiMediaUrl(infoBlock.image?.formats?.thumbnail?.url ?? infoBlock.image?.url),
+    imageSrc: getStrapiMediaUrl(
+      infoBlock.image?.formats?.large?.url ??
+      infoBlock.image?.formats?.medium?.url ??
+      infoBlock.image?.url
+    ),
     button: createInfoBlockButton(infoBlock.button),
   }));
 }
