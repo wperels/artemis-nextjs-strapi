@@ -13,8 +13,19 @@ console.log('Button exists?:', !!button); */
 return (
     <div className="info-block">
     <div className={`info ${showimageRight ? 'info--reversed' : ''}`}>
-      <img src= {imageSrc || "/info-blocks/rectangle.png"} alt="" className="info__image" />
+      <img src= {imageSrc || "/assets/Artemis_program.svg"} alt="" className="info__image" />
 
+    {/* <div className="info__image-wrapper">
+      <Image
+        src={imageSrc || "/assets/Artemis_program.svg"}
+        alt={headline}
+            width={800}
+            height={600}
+        className="info__image"
+        //style={{ objectFit: 'cover', objectPosition: 'center' }}
+        style={{ width: '100%', height: 'auto' }}
+      />
+    </div> */}
 
     <div className="info__text">
       <h2 className="info__headline">{headline}</h2>
