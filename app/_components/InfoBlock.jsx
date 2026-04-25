@@ -13,7 +13,7 @@ console.log('Button exists?:', !!button); */
 return (
     <div className="info-block">
     <div className={`info ${showimageRight ? 'info--reversed' : ''}`}>
-      <img src= {imageSrc || "/assets/Artemis_program.svg"} alt="" className="info__image" />
+      <img src= {imageSrc || "/assets/Artemis_program.svg"} alt={headline || "NASA Artemis program logo"} className="info__image" />
 
     {/* <div className="info__image-wrapper">
       <Image
