@@ -67,14 +67,45 @@ export function createInfoBlockButton(buttonData) {
 }
 
 export async function fetchBlogArticles() {
-  const blogData = await fetchDataFromStrapi('blog-articles?populate=featuredImage');
-
-  const processBlogArticles = blogData.map(processBlogArticle);
-  processBlogArticles.sort(
-    (a, z) => new Date(z.publishedAt) - new Date(a.publishedAt)
+  const query = qs.stringify(
+    {
+      populate: {
+        featuredImage: true,
+        articleContent: {
+          populate: '*',
+        },
+      },
+    },
+    { encodeValuesOnly: true }
   );
 
-  return processBlogArticles;
+  const url = `${BASE_URL}/api/blog-articles?${query}`;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+  try {
+    const response = await fetch(url, {
+      next: { revalidate: 300 },
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+    const json = await response.json();
+    const blogData = json.data;
+
+    const processBlogArticles = blogData.map(processBlogArticle);
+    processBlogArticles.sort(
+      (a, z) => new Date(z.publishedAt) - new Date(a.publishedAt)
+    );
+
+    return processBlogArticles;
+
+  } catch (err) {
+    console.error('Failed to fetch blog articles:', err.message);
+    throw err;
+  }
 }
 
 function processBlogArticle(article) {
@@ -84,7 +115,13 @@ function processBlogArticle(article) {
     featuredImage: article.featuredImage?.url
       ? getStrapiMediaUrl(article.featuredImage.url)
       : null,
-    articleContent: article.articleContent || [],
+    articleContent: (article.articleContent || []).map((component) => ({
+      ...component,
+      // Resolve image URL for paragraphWithImage and landscapeImage components
+      image: component.image?.url
+        ? getStrapiMediaUrl(component.image.url)
+        : component.image ?? null,
+    })),
   };
 }
 
@@ -122,9 +159,19 @@ export function formatDate(dateString) {
 }
 
 export function extractImageUrl(imageData) {
-  if (!imageData || typeof imageData !== 'object') return '';
-  const url = imageData.url || imageData.formats?.thumbnail?.url || '';
-  return getStrapiMediaUrl(url);
+  if (!imageData) return null;
+  if (typeof imageData === 'string') return getStrapiMediaUrl(imageData); // ← this handles your case
+  if (typeof imageData === 'object') {
+    const url =
+      imageData.url ||
+      imageData.formats?.large?.url ||
+      imageData.formats?.medium?.url ||
+      imageData.formats?.small?.url ||
+      imageData.formats?.thumbnail?.url ||
+      null;
+    return url ? getStrapiMediaUrl(url) : null;
+  }
+  return null;
 }
 
 export function extractLandscapeImageUrl(imageData) {

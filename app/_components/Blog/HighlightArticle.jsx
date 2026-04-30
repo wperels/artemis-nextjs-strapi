@@ -2,10 +2,8 @@ import Link from "next/link";
 //import Image from "next/image";
 
 const HighlightArticle = ( {data} ) => {
-/*    if (!data) {
-    return null; // or return a loading/placeholder component
-  }*/
-
+  
+  if (!data) return <p className="text-muted">No highlighted mission available.</p>;
   const { headline, excerpt, slug, featuredImage } = data;  
  
   return ( 
