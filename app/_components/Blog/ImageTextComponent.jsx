@@ -6,18 +6,20 @@ const ImageTextComponent = ({ component }) => {
   const { paragraph, imageCaption, image, isLandscape, imageShowsRight } =
     component || {};
 
+  const imageUrl = extractImageUrl(image); // resolve first
+
   return (
     <div
       className={`article-text-image ${isLandscape ? "" : "article-text-image--portrait"}
       ${imageShowsRight ? "" : "article-text-image--reversed"}`}
-    > 
-    <div className="copy article-text-image__text article-paragraph">
-     <ReactMarkdown>{renderParagraphContent(paragraph)}</ReactMarkdown>
-    </div>
+    >
+      <div className="copy article-text-image__text article-paragraph">
+        <ReactMarkdown>{renderParagraphContent(paragraph)}</ReactMarkdown>
+      </div>
       <div className="article-text-image__container">
-        {image && (
+        {imageUrl && (  // ← check resolved URL, not raw object
           <div className="article-text-image__image">
-            <img src={extractImageUrl(image)} alt={imageCaption || ''} />
+            <img src={imageUrl} alt={imageCaption || ''} />
           </div>
         )}
         {imageCaption && (
