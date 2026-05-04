@@ -1,8 +1,8 @@
 .article-intro {
   position: relative;
-  padding: 35rem 4.8rem 0;
+  padding: calc(var(--header-height) + 2rem) 4.8rem 0;
   height: 83rem;
-  margin: 0 -4.8rem; // cancels global main padding in base.scss
+  margin: 0 -4.8rem;
 
   &__background {
     position: absolute;
@@ -11,6 +11,18 @@
     z-index: -1;
     width: 100%;
     height: 83rem;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 0 0 20rem 20rem;
+      background: linear-gradient(to right,
+          rgba(0, 0, 0, 0.65) 0%,
+          rgba(0, 0, 0, 0.45) 15%,
+          rgba(0, 0, 0, 0.15) 30%,
+          rgba(0, 0, 0, 0.0) 45%);
+    }
 
     & img {
       width: 100%;
@@ -22,17 +34,26 @@
   }
 
   &__headline {
-    width: 59rem;
+    width: 36rem; // ← was 59rem
     margin-bottom: 2.4rem;
+    color: #ffffff;
+  }
+
+  .copy-small {
+    color: rgba(255, 255, 255, 0.88);
   }
 
   @include respond(tab-land) {
-    padding: 25rem 2.5rem 0;
+    padding: calc(var(--header-height) + 1.5rem) 2.5rem 0;
     height: 80vh;
-    margin: 0 -2.5rem; // matches tab-land padding in base.scss
+    margin: 0 -2.5rem;
 
     &__background {
       height: 80vh;
+
+      &::after {
+        border-radius: 0 0 20rem 20rem;
+      }
     }
 
     &__headline {
@@ -43,12 +64,16 @@
   }
 
   @include respond(phone) {
-    padding: 20rem 1.5rem 0;
+    padding: calc(var(--header-height) + 1rem) 1.5rem 0;
     height: 75vh;
-    margin: 0 -1.5rem; // matches phone padding in base.scss
+    margin: 0 -1.5rem;
 
     &__background {
       height: 75vh;
+
+      &::after {
+        border-radius: 0 0 10rem 10rem;
+      }
 
       & img {
         border-radius: 0 0 10rem 10rem;
@@ -64,12 +89,16 @@
   }
 
   @include respond(small-phone) {
-    padding: 16rem 1rem 0;
+    padding: calc(var(--header-height) + 0.5rem) 1rem 0;
     height: 65vh;
-    margin: 0 -1rem; // ← was -1.5rem, now matches base.scss 1rem padding
+    margin: 0 -1rem;
 
     &__background {
       height: 55vh;
+
+      &::after {
+        border-radius: 0 0 8rem 8rem;
+      }
 
       & img {
         border-radius: 0 0 8rem 8rem;
@@ -77,9 +106,9 @@
     }
 
     &__headline {
-      font-size: 2.8rem; // was 1.6rem
-      margin-bottom: 0.2rem; // was 0.8rem
-      line-height: 1.0; // tighten at 360px
+      font-size: 2.8rem;
+      margin-bottom: 0.2rem;
+      line-height: 1.0;
     }
   }
 }

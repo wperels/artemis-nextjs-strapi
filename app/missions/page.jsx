@@ -27,7 +27,7 @@ export default async function Page() {
     <main className="blog-page">
       <HighlightArticle data={highlightArticleData} />
       <SubscribeToNewsletter />
-      <FeaturedItems items={featuredArticlesData} />
+      <FeaturedItems items={featuredArticlesData} headline="The Missions"/>
     </main>
   );
 }

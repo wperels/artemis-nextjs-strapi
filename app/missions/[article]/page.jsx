@@ -33,7 +33,7 @@ export default async function Page({ params }) {
       {article.articleContent.map((component) => (
         <ArticleComponent key={component.id} component={component} />
       ) )}
-      <FeaturedItems items={moreArticles} headline={"Explore our other articles"} />
+      <FeaturedItems items={moreArticles} headline={"The Missions"} />
      </section>
     </main>
   );

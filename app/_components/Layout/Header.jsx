@@ -15,11 +15,13 @@ const Header = () => {
 
   return (
     <header className={`header ${path === "/why-the-moon" ? "header--light" : ""}`}>
+    <Link href="/">
       <img
         className="header__logo"
         src="/assets/Artemis_program.svg"
-        alt="NASA Artemis program logo"
+        alt="NASA Artemis program logo — return to homepage"
       />
+    </Link>  
 
       {/* Hamburger button — top right */}
       <button

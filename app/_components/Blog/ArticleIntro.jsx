@@ -1,4 +1,4 @@
-import {  fetchBlogArticles, fetchDataFromStrapi, formatDate } from "../../../utils/strapi.utils"; 
+import {  fetchBlogArticles, fetchDataFromStrapi } from "../../../utils/strapi.utils"; 
 
 const ArticleIntro = ({ article }) => {
     //console.log('Intro article:', article)
@@ -12,7 +12,7 @@ const ArticleIntro = ({ article }) => {
 <h3 className="article-intro__headline">
   {article.headline}
 </h3>
-<p className="copy-small bold">{formatDate(article.publishedAt)}</p>
+{/* <p className="copy-small bold">{formatDate(article.publishedAt)}</p>*/}
 <p className="copy-small">{article.author}</p>
   </div>
 
