@@ -1,35 +1,28 @@
 .input {
   outline: none;
   border: none;
-
-  /* Align with body text size */
-  font-size: var(--text-body, 2rem);
+  font-size: 2rem;
 
   &::placeholder {
-    color: var(--color-text, black);
-    font-size: inherit;
-    opacity: 0.7;
+    color: black;
+    font-size: 2rem;
   }
 
-  /* Beige variant */
   &--beige {
     height: 6.4rem;
     border-radius: 1.8rem;
     padding: 2rem;
-    background-color: var(--color-surface, $light-brown);
-    color: var(--color-text, black);
+    background-color: $light-brown;
   }
 
   &__container {
-    .input {
+    & .input {
       display: block;
-      width: 100%;
     }
 
-    label {
+    & label {
       display: block;
       margin-bottom: 1.6rem;
-      font-size: var(--text-small, 1.2rem);
     }
   }
 }

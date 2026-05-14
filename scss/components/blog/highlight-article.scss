@@ -3,22 +3,22 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-
   width: 100%;
   margin-bottom: 10rem;
-
-  /* Space content below the header */
   padding-top: var(--header-height);
+
 
   &__info {
     width: 49%;
     flex-shrink: 0;
 
-    .copy {
+
+    & .copy {
       margin-top: 4rem;
       margin-bottom: 3rem;
     }
   }
+
 
   &__image {
     display: block;
@@ -29,31 +29,44 @@
     object-fit: cover;
   }
 
-  /* Tablet and below: stack with gap */
+
   @include respond(tab-land) {
     flex-direction: column;
     align-items: center;
     gap: 3rem;
 
-    &__info,
+
+    &__info {
+      width: 100%;
+    }
+
+
     &__image {
       width: 100%;
     }
   }
 
-  /* Phone: fine-tune spacing and radius */
+
   @include respond(phone) {
+    flex-direction: column;
+    align-items: center;
     gap: 2rem;
     margin-bottom: 6rem;
 
+
     &__info {
-      .copy {
+      width: 100%;
+
+
+      & .copy {
         margin-top: 2rem;
         margin-bottom: 2rem;
       }
     }
 
+
     &__image {
+      width: 100%;
       border-radius: 2rem;
     }
   }

@@ -1,39 +1,57 @@
 .static-page {
   max-width: 760px;
   margin: 0 auto;
+  padding: calc(var(--header-height) + 2rem) 1.5rem 4rem;
 
-  /* Top padding accounts for header height; horizontal uses gutters */
-  padding-top: calc(var(--header-height) + 2rem);
-  padding-inline: var(--page-padding-inline);
-  padding-bottom: 4rem;
-
-  /* Remove top padding when a banner is present */
+  // Remove top padding when a banner is present
   &:has(.static-page__banner) {
     padding-top: 0;
   }
 
   h1 {
-    font-size: var(--text-h1, 6rem);
+    font-size: 6rem;
     margin-bottom: 1.5rem;
   }
 
   h2 {
-    font-size: var(--text-h4, 2.4rem);
+    font-size: 1.5rem;
     margin: 2rem 0 0.5rem;
   }
 
   p,
   li,
   span {
-    font-size: var(--text-body, 1.6rem);
+    font-size: 1.25rem;
   }
 
   a {
     text-decoration: underline;
   }
+
+  @include respond(small-phone) {
+    padding: 10rem 5rem 4rem;
+
+    h1 {
+      font-size: 8rem; // 4rem × 2 (was 4rem on small-phone)
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 3rem; // 1.5rem × 2
+      margin: 2rem 0 0.5rem;
+    }
+
+    p,
+    li,
+    span {
+      font-size: 2.5rem; // 1.25rem × 2
+    }
+  }
 }
 
-/* About page hero layout */
+
+// ── About page hero layout ──────────────────────────────────
+
 .static-page__hero {
   display: flex;
   align-items: flex-start;
@@ -66,7 +84,9 @@
   }
 }
 
-/* Banner image strip (Tech Stack page) */
+
+// ── Banner image strip (Tech Stack page) ────────────────────
+
 .static-page__banner {
   position: relative;
   width: 100%;
@@ -79,15 +99,15 @@
   }
 }
 
-/* Content below banner */
+
+// ── Content below banner ────────────────────────────────────
+
 .static-page__content {
   max-width: 760px;
   margin: 0 auto;
-  padding-top: 3rem;
-  padding-inline: var(--page-padding-inline);
-  padding-bottom: 4rem;
+  padding: 3rem 1.5rem 4rem;
 
   @include respond(small-phone) {
-    padding-top: 2rem;
+    padding: 2rem 1.5rem 4rem;
   }
 }
