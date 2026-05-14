@@ -17,11 +17,13 @@
       position: absolute;
       inset: 0;
       border-radius: 0 0 20rem 20rem;
-      background: linear-gradient(to right,
-          rgba(0, 0, 0, 0.65) 0%,
-          rgba(0, 0, 0, 0.45) 15%,
-          rgba(0, 0, 0, 0.15) 30%,
-          rgba(0, 0, 0, 0.0) 45%);
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.65) 0%,
+        rgba(0, 0, 0, 0.45) 15%,
+        rgba(0, 0, 0, 0.15) 30%,
+        rgba(0, 0, 0, 0) 45%
+      );
     }
 
     & img {
@@ -90,25 +92,29 @@
 
   @include respond(small-phone) {
     padding: calc(var(--header-height) + 0.5rem) 1rem 0;
-    height: 65vh;
+    height: 55vh;       // was 65vh
     margin: 0 -1rem;
 
     &__background {
-      height: 55vh;
+      height: 45vh;     // was 55vh
 
       &::after {
         border-radius: 0 0 8rem 8rem;
       }
 
       & img {
+        width: 100%;
+        height: 100%;
         border-radius: 0 0 8rem 8rem;
+        object-fit: contain;   // show entire image, no crop
+        object-position: center center;
       }
     }
 
     &__headline {
       font-size: 2.8rem;
       margin-bottom: 0.2rem;
-      line-height: 1.0;
+      line-height: 1;
     }
   }
 }
