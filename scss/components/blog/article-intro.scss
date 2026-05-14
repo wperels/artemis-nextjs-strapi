@@ -1,114 +1,56 @@
 .article-intro {
+  outline: 3px solid red;}
+
+.hero {
   position: relative;
-  padding: calc(var(--header-height) + 2rem) 4.8rem 0;
+  width: calc(100% + 9.6rem);
   height: 83rem;
-  margin: 0 -4.8rem;
+  padding: 22rem 4.8rem 0;
+  margin-left: -4.8rem;
+  margin-right: -4.8rem;
+  margin-bottom: 12.5rem;
+
+  @include respond(small-phone) {
+    padding: 12rem 4.8rem 0;
+  }
 
   &__background {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
     width: 100%;
-    height: 83rem;
+    height: 100%;
+    z-index: -1;
 
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 0 0 20rem 20rem;
-      background: linear-gradient(to right,
-          rgba(0, 0, 0, 0.65) 0%,
-          rgba(0, 0, 0, 0.45) 15%,
-          rgba(0, 0, 0, 0.15) 30%,
-          rgba(0, 0, 0, 0.0) 45%);
-    }
-
-    & img {
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center bottom;
-      border-radius: 0 0 20rem 20rem;
+      border-radius: 0 0 200px 200px;
     }
   }
 
   &__headline {
-    width: 36rem; // ← was 59rem
-    margin-bottom: 2.4rem;
-    color: #ffffff;
-  }
+    margin-bottom: 6.5rem;
 
-  .copy-small {
-    color: rgba(255, 255, 255, 0.88);
-  }
-
-  @include respond(tab-land) {
-    padding: calc(var(--header-height) + 1.5rem) 2.5rem 0;
-    height: 80vh;
-    margin: 0 -2.5rem;
-
-    &__background {
-      height: 80vh;
-
-      &::after {
-        border-radius: 0 0 20rem 20rem;
-      }
+    &--orange {
+      color: white;
     }
 
-    &__headline {
-      width: 100%;
-      font-size: 4.5rem;
-      line-height: 5.5rem;
+    &--turquoise {
+      color: white;
     }
   }
 
-  @include respond(phone) {
-    padding: calc(var(--header-height) + 1rem) 1.5rem 0;
-    height: 75vh;
-    margin: 0 -1.5rem;
+  &__logo {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
 
-    &__background {
-      height: 75vh;
-
-      &::after {
-        border-radius: 0 0 10rem 10rem;
-      }
-
-      & img {
-        border-radius: 0 0 10rem 10rem;
-        object-position: center center;
-      }
-    }
-
-    &__headline {
-      width: 100%;
-      font-size: 2rem;
-      margin-bottom: 1.2rem;
-    }
-  }
-
-  @include respond(small-phone) {
-    padding: calc(var(--header-height) + 0.5rem) 1rem 0;
-    height: 65vh;
-    margin: 0 -1rem;
-
-    &__background {
-      height: 55vh;
-
-      &::after {
-        border-radius: 0 0 8rem 8rem;
-      }
-
-      & img {
-        border-radius: 0 0 8rem 8rem;
-      }
-    }
-
-    &__headline {
-      font-size: 2.8rem;
-      margin-bottom: 0.2rem;
-      line-height: 1.0;
+    &--orange {
+      filter: invert(62%) sepia(21%) saturate(1646%) hue-rotate(348deg) brightness(88%) contrast(81%);
     }
   }
 }

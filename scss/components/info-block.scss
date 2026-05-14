@@ -1,10 +1,12 @@
 .info {
   display: flex;
   justify-content: space-between;
-  padding-right: 4.8rem;
+
+  /* Use global gutter token for horizontal spacing */
+  padding-inline: var(--page-padding-inline);
   margin-top: 8rem;
 
-  // ─── Image & Text Columns ───────────────────────────────────────────
+  // ─── Image & Text Columns ─────────────────────────────
   &__image,
   &__text {
     width: 48%;
@@ -12,49 +14,40 @@
 
   &__image {
     aspect-ratio: 3 / 2;
-    border-radius: 0px 329px 329px 0px;
+    border-radius: 0 329px 329px 0;
     object-fit: cover;
     object-position: center;
     display: block;
     align-self: flex-start;
   }
 
-  // ─── Text Block ─────────────────────────────────────────────────────
+  // ─── Text Block ───────────────────────────────────────
   &__headline {
     margin-top: 4rem;
     margin-bottom: 3rem;
   }
 
-  & .btn {
+  .btn {
     margin-top: 3rem;
   }
 
-  // ─── Reversed Layout ────────────────────────────────────────────────
+  // ─── Reversed Layout ──────────────────────────────────
   &--reversed {
     flex-direction: row-reverse;
-    padding-left: 4.8rem;
-    padding-right: 0;
 
-    & .info__image {
-      border-radius: 329px 0px 0px 329px;
+    .info__image {
+      border-radius: 329px 0 0 329px;
     }
   }
 
-  // ─── Responsive: Tablet Landscape ───────────────────────────────────
+  // ─── Responsive: Tablet Landscape ─────────────────────
   @include respond(tab-land) {
-    padding-right: 2.5rem;
-
-    &--reversed {
-      padding-left: 2.5rem;
-      padding-right: 0;
-    }
+    margin-top: 6rem;
   }
 
-  // ─── Responsive: Phone ──────────────────────────────────────────────
+  // ─── Responsive: Phone ────────────────────────────────
   @include respond(phone) {
-    flex-direction: column !important;
-    padding-right: 1.5rem;
-    padding-left: 0;
+    flex-direction: column;
     margin-top: 4rem;
 
     &__image,
@@ -64,8 +57,7 @@
     }
 
     &__image {
-      aspect-ratio: 3 / 2;
-      border-radius: 0 !important;
+      border-radius: 0;
     }
 
     &__headline {
@@ -73,9 +65,7 @@
     }
 
     &--reversed {
-      flex-direction: column !important;
-      padding-left: 1.5rem;
-      padding-right: 0;
+      flex-direction: column;
     }
   }
 }

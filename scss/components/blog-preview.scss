@@ -2,52 +2,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   margin-top: 10.5rem;
   margin-bottom: 12rem;
-  padding: 0 4.8rem;
 
-  /* @include respond(tab-land) {
-    padding: 0 2.5rem;
-  } */
+  /* Use global gutters instead of hard-coded padding */
+  padding-inline: var(--page-padding-inline);
 
   &__headline {
     margin-bottom: 8rem;
+    margin-right: auto;
   }
 
   &__container {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 6%;
-    row-gap: 6rem;
+    width: 100%;
 
-    /* @include respond(tab-land) {
-      column-gap: 4rem;
-      row-gap: 4rem;
-    }
+    display: grid;
+    gap: 4rem 3rem;
+    /* row-gap column-gap */
 
-    @include respond(phone) {
-      flex-direction: column !important;
-      gap: 3rem;
-      width: 100%;
-    } */
+    /* 2–3 column grid depending on space */
+    grid-template-columns: repeat(auto-fill,
+        minmax(min(28rem, 100%), 1fr));
   }
 
   &__item {
+
+    /* Featured first item spans 2 columns when space allows */
     &:nth-of-type(1) {
-      width: 60.5%;
-
-     /*  @include respond(phone) {
-        width: 100% !important;
-      } */
-    }
-
-    &:nth-of-type(2) {
-      width: 33.5%;
-    }
-
-    &:nth-of-type(3),
-    &:nth-of-type(4) {
-      width: 47%;
+      grid-column: span 2;
     }
   }
 
@@ -55,7 +38,7 @@
     height: 36rem;
     width: 100%;
 
-    & img {
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;

@@ -1,6 +1,17 @@
 .btn {
-  font-size: 2.5rem;
+  /* Base font size: align with body/heading scale */
+  font-size: 2rem;
 
+  /* Reset-ish */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+
+  /* Size variants */
   &--small {
     padding: 1rem 1.8rem;
     border-radius: 2.5rem;
@@ -11,33 +22,34 @@
     border-radius: 3.2rem;
   }
 
+  /* Color variants using tokens with SASS fallbacks */
   &--black {
-    background-color: $black;
+    background-color: var(--color-text, $black);
     color: white;
   }
 
   &--turquoise {
-    background-color: $turquoise;
+    background-color: var(--color-primary, $turquoise);
     color: white;
   }
 
   &--orange {
-    background-color: $orange;
+    background-color: var(--color-accent, $orange);
     color: white;
   }
 
   &--beige {
-    background-color: $beige;
+    background-color: var(--color-border, $beige);
     color: white;
   }
 
+  /* Optional: small-phone refinement */
   @include respond(small-phone) {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
 
     &--small {
-      padding: 0.6rem 1rem;
-      border-radius: 2rem;
+      padding: 0.8rem 1.4rem;
+      border-radius: 2.2rem;
     }
   }
-
 }

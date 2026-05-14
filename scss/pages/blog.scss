@@ -1,37 +1,38 @@
+.article-section {
+  outline: 3px solid blue;
+}
+
 .blog-page,
 .events-page {
-  padding: 20rem 4.8rem 12rem;
-
-  @include respond(tab-land) {
-    padding: 14rem 3rem 8rem;
-  }
+  /* Top padding accounts for header + breathing room.
+     Horizontal uses global gutters; bottom uses a fixed rhythm. */
+  padding-top: calc(var(--header-height) + 4rem);
+  padding-inline: var(--page-padding-inline);
+  padding-bottom: 12rem;
 
   @include respond(phone) {
-    padding: 10rem 1.5rem 6rem;
+    padding-bottom: 8rem;
   }
 
   @include respond(small-phone) {
-    padding: 8rem 1.2rem 4rem;
+    padding-bottom: 6rem;
   }
 }
 
+/* Generic article section wrapper */
 .article-section {
-  padding: 0 4.8rem;
+  padding-inline: var(--page-padding-inline);
   margin-bottom: 12rem;
 
   @include respond(tab-land) {
-    padding: 0 3rem;
     margin-bottom: 8rem;
   }
 
   @include respond(phone) {
-    padding: 0 1.5rem;
     margin-bottom: 6rem;
   }
 
   @include respond(small-phone) {
-    padding: 0 1.2rem;
     margin-bottom: 2rem;
   }
-
 }

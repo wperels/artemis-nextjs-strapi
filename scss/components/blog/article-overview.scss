@@ -1,6 +1,7 @@
 .article-overview {
   display: flex;
   justify-content: space-between;
+
   margin-top: 4rem;
   margin-bottom: 12rem;
 
@@ -10,13 +11,13 @@
 
   &__contents {
     padding-top: 17rem;
-    font-size: 3rem;
+    font-size: var(--text-h4, 3rem);
     color: #0041e8;
     list-style: none;
     text-decoration: underline;
     text-align: right;
 
-    & li {
+    li {
       margin-bottom: 1.4rem;
     }
   }
@@ -25,6 +26,7 @@
     margin-bottom: 2.4rem;
   }
 
+  /* Tablet and below: stack sections */
   @include respond(tab-land) {
     flex-direction: column;
     gap: 2rem;
@@ -35,27 +37,20 @@
 
     &__contents {
       padding-top: 2rem;
-      font-size: 2rem;
+      font-size: var(--text-body, 1.6rem);
       text-align: left;
     }
   }
 
+  /* Phone: fine-tune spacing and TOC text */
   @include respond(phone) {
-    flex-direction: column;
-    gap: 2rem;
     margin-top: 2rem;
     margin-bottom: 8rem;
 
-    &__info {
-      width: 100%;
-    }
-
     &__contents {
       padding-top: 1rem;
-      font-size: 1.5rem;
-      text-align: left;
 
-      & li {
+      li {
         margin-bottom: 1rem;
       }
     }
@@ -65,14 +60,14 @@
     }
   }
 
+  /* Small-phone: small typography adjustments */
   @include respond(small-phone) {
     &__headline {
-      font-size: 2rem; // bump h3 up
+      font-size: var(--text-h4, 2rem);
     }
 
     &__excerpt {
-      font-size: 1.4rem; // bring h5 down
+      font-size: var(--text-body, 1.4rem);
     }
   }
-
 }

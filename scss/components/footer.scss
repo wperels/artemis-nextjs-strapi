@@ -1,75 +1,71 @@
 .footer {
-  background-color: black;
-  color: white;
-  padding: 6rem 4.8rem 4.5rem;
+  /* Use token-based colors */
+  background-color: var(--color-text, black);
+  color: var(--color-bg, white);
 
+  /* Use global gutters horizontally + vertical padding */
+  padding-block: 6rem 4.5rem;
+  padding-inline: var(--page-padding-inline);
+
+  display: flex;
+  flex-direction: column;
 
   &__logo {
     width: 8rem;
     filter: invert(99%) sepia(3%) saturate(825%) hue-rotate(200deg) brightness(118%) contrast(100%);
   }
 
-
   &__nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 6rem;
     margin-bottom: 3.5rem;
+    gap: 2rem;
   }
-
 
   &__links {
     display: flex;
     list-style: none;
-
-
-    & li:not(:last-of-type) {
-      margin-right: 6.3rem;
-    }
+    gap: 6.3rem;
   }
-
 
   &__policies {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
   }
-
 
   &__policies-nav {
     display: flex;
     list-style: none;
-
-
-    & li:not(:last-of-type) {
-      margin-right: 3.5rem;
-    }
+    gap: 3.5rem;
   }
 
+  /* Tablet tweaks */
   @include respond(tab-land) {
-    padding: 4rem 2.5rem 3rem;
+    padding-block: 4rem 3rem;
 
     &__logo {
       width: 6.5rem;
     }
 
     &__nav {
-      padding-right: 4rem;
       margin-bottom: 2.5rem;
     }
 
-    &__links li:not(:last-of-type) {
-      margin-right: 4rem;
+    &__links {
+      gap: 4rem;
     }
 
-    &__policies-nav li:not(:last-of-type) {
-      margin-right: 2.5rem;
+    &__policies-nav {
+      gap: 2.5rem;
     }
   }
 
+  /* Phone layout */
   @include respond(phone) {
-    padding: 3rem 1.5rem 2rem;
-    flex-direction: column;
+    padding-block: 3rem 2rem;
     text-align: center;
 
     &__logo {
@@ -78,7 +74,6 @@
     }
 
     &__nav {
-      padding-right: 0;
       flex-direction: column;
       gap: 1rem;
       margin-bottom: 2rem;
@@ -87,10 +82,6 @@
     &__links {
       flex-direction: column;
       gap: 0.5rem;
-    }
-
-    &__links li:not(:last-of-type) {
-      margin-right: 0;
     }
 
     &__policies {
@@ -102,14 +93,11 @@
       flex-direction: column;
       gap: 0.5rem;
     }
-
-    &__policies-nav li:not(:last-of-type) {
-      margin-right: 0;
-    }
   }
 
+  /* Small-phone fine-tuning */
   @include respond(small-phone) {
-    padding: 2rem 1rem 1.5rem;
+    padding-block: 2rem 1.5rem;
 
     &__logo {
       width: 4rem;
