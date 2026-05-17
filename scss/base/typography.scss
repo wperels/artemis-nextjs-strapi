@@ -8,9 +8,8 @@ h4 {
 }
 
 h1 {
-  font-size: 8rem; // was 10rem
-  line-height: 9.6rem;
-  ; // keep ~1.2× the font-size
+  font-size: 8rem;
+  line-height: 9.6rem; // keep ~1.2× the font-size
   font-weight: 500;
 }
 
@@ -43,8 +42,8 @@ h5 {
 
 @include respond(small-phone) {
   .copy-small {
-    font-size: 7.5px;
-    padding-top: 0.1rem; // reduce from 0.6rem
+    font-size: 12px; // ← was 7.5px, 12px is the absolute minimum
+    padding-top: 0.1rem;
   }
 
   h1 {
