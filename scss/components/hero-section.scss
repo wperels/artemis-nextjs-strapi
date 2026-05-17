@@ -21,7 +21,7 @@
   @include respond(small-phone) {
     height: 50vh; // ← new
     padding-top: 8rem; // ← was 12rem
-    margin-bottom: 6rem;
+    margin-bottom: 10rem;
   }
 
   &__background {

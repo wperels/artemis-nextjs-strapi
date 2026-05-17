@@ -53,8 +53,8 @@
   // ─── Responsive: Phone ──────────────────────────────────────────────
   @include respond(phone) {
     flex-direction: column !important;
-    padding-right: 1.5rem;
-    padding-left: 0;
+    padding-right: 0; // ← was 1.5rem, use 0 since main padding handles it
+    padding-left: 0; // ← was 0
     margin-top: 4rem;
 
     &__image,
@@ -74,8 +74,23 @@
 
     &--reversed {
       flex-direction: column !important;
-      padding-left: 1.5rem;
+      padding-left: 0; // ← was 1.5rem, use 0 since main padding handles it
       padding-right: 0;
+    }
+  }
+
+  // ─── Responsive: Small Phone ────────────────────────────────────────
+  @include respond(small-phone) {
+    // ← NEW block
+    margin-top: 3rem;
+
+    &__headline {
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    & .btn {
+      margin-top: 2rem;
     }
   }
 }
