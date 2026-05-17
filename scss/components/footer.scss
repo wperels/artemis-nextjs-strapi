@@ -1,14 +1,12 @@
 .footer {
   background-color: black;
   color: white;
-  padding: 6rem 4.8rem 4.5rem;
-
+  padding: 6rem var(--page-padding) 4.5rem; // ← uses --page-padding
 
   &__logo {
     width: 8rem;
     filter: invert(99%) sepia(3%) saturate(825%) hue-rotate(200deg) brightness(118%) contrast(100%);
   }
-
 
   &__nav {
     display: flex;
@@ -18,28 +16,23 @@
     margin-bottom: 3.5rem;
   }
 
-
   &__links {
     display: flex;
     list-style: none;
-
 
     & li:not(:last-of-type) {
       margin-right: 6.3rem;
     }
   }
 
-
   &__policies {
     display: flex;
     justify-content: space-between;
   }
 
-
   &__policies-nav {
     display: flex;
     list-style: none;
-
 
     & li:not(:last-of-type) {
       margin-right: 3.5rem;
@@ -47,7 +40,7 @@
   }
 
   @include respond(tab-land) {
-    padding: 4rem 2.5rem 3rem;
+    padding: 4rem var(--page-padding) 3rem; // ← uses --page-padding
 
     &__logo {
       width: 6.5rem;
@@ -68,7 +61,7 @@
   }
 
   @include respond(phone) {
-    padding: 3rem 1.5rem 2rem;
+    padding: 3rem var(--page-padding) 2rem; // ← uses --page-padding
     flex-direction: column;
     text-align: center;
 
@@ -109,10 +102,11 @@
   }
 
   @include respond(small-phone) {
-    padding: 2rem 1rem 1.5rem;
+    padding: 2rem var(--page-padding) 1.5rem;
 
     &__logo {
-      width: 4rem;
+      width: 12rem; // ← was 4rem (40px), now 60px — more visible
+      margin-bottom: .25rem; // ← add breathing room below logo
     }
 
     &__nav {
@@ -122,7 +116,7 @@
     &__links,
     &__policies-nav {
       gap: 0.75rem;
-      font-size: 0.875rem;
+      font-size: 1.2rem;
     }
   }
 }
