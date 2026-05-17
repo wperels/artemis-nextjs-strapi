@@ -1,31 +1,28 @@
 .hero {
   position: relative;
-  width: calc(100% + 9.6rem); // ✅ only one width declaration
+  width: calc(100% + (var(--page-padding) * 2)); // ← uses --page-padding
   height: 83rem;
-  padding: 22rem 4.8rem 0;
-  margin-left: -4.8rem;
-  margin-right: -4.8rem;
+  padding: 22rem var(--page-padding) 0; // ← uses --page-padding
+  margin-left: calc(var(--page-padding) * -1); // ← uses --page-padding
+  margin-right: calc(var(--page-padding) * -1); // ← uses --page-padding
   margin-bottom: 12.5rem;
 
-  @include respond(small-phone) {
-    padding: 12rem 4.8rem 0;
-  }
-
-  /*  @include respond(tab-land) {
-    height: 65vh; // Tablet landscape
-    padding: 15rem 2.5rem 0;
+  @include respond(tab-land) {
+    height: 65vh; // ← was commented out
+    padding-top: 15rem; // ← was commented out
   }
 
   @include respond(phone) {
-    height: 50vh; // Mobile height
-    padding: 8rem 1.5rem 0;
+    height: 55vh; // ← was commented out
+    padding-top: 10rem; // ← was commented out
+    margin-bottom: 8rem;
+  }
 
-    .headline {
-      font-size: 3.5rem;
-      line-height: 1.2;
-    }
-  } */
-
+  @include respond(small-phone) {
+    height: 50vh; // ← new
+    padding-top: 8rem; // ← was 12rem
+    margin-bottom: 6rem;
+  }
 
   &__background {
     position: absolute;
