@@ -1,5 +1,4 @@
 import Link from "next/link";
-//import Image from "next/image";
 
 const HighlightArticle = ( {data} ) => {
   
@@ -7,18 +6,27 @@ const HighlightArticle = ( {data} ) => {
   const { headline, excerpt, slug, featuredImage } = data;  
  
   return ( 
-<article className="highlight-article">
-    <div className="highlight-article__info">
-      <h3>{headline}</h3>
-      <p className="copy">{excerpt}</p>
-      <Link className="btn btn--turquoise btn--medium" href={`/missions/${slug}`}>
-        Read More
-      </Link>
-    </div>
-      {/* <img className="highlight-article__image" src={featuredImage} width= {500} height={500} alt="" ></Image>*/}
-    <img className="highlight-article__image" src={featuredImage} alt="" />
-
-</article>
+    <article className="highlight-article">
+      <div className="highlight-article__info">
+        <h3>{headline}</h3>
+        <p className="copy">{excerpt}</p>
+        <Link className="btn btn--turquoise btn--medium" href={`/missions/${slug}`}>
+          Read More
+        </Link>
+      </div>
+      <div className="highlight-article__media">
+        <img className="highlight-article__image" src={featuredImage} alt="" />
+        <div className="highlight-article__overlay">
+          <h3>{headline}</h3>
+        </div>
+      </div>
+      <div className="highlight-article__mobile-footer">
+        <p className="copy">{excerpt}</p>
+        <Link className="btn btn--turquoise btn--medium" href={`/missions/${slug}`}>
+          Read More
+        </Link>
+      </div>
+    </article>
   )
 }
 
