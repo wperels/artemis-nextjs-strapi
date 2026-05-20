@@ -5,7 +5,7 @@
   align-items: flex-start;
   width: 100%;
   margin-bottom: 10rem;
-  padding-top: var(--header-height);
+  padding-top: 2rem;  // ← was var(--header-height), blog-page now handles clearance
 
   &__info {
     width: 49%;

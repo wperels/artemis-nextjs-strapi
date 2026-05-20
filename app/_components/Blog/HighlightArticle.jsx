@@ -14,8 +14,13 @@ const HighlightArticle = ( {data} ) => {
           Read More
         </Link>
       </div>
+
+      {/* Desktop image */}
+      <img className="highlight-article__image" src={featuredImage} alt="" />
+
+      {/* Mobile only */}
       <div className="highlight-article__media">
-        <img className="highlight-article__image" src={featuredImage} alt="" />
+        <img src={featuredImage} alt="" />
         <div className="highlight-article__overlay">
           <h3>{headline}</h3>
         </div>
