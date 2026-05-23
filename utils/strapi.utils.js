@@ -46,7 +46,8 @@ export function processInfoBlocks(data) {
       showimageRight: infoBlock.showimageRight,
       imageSrc: getStrapiMediaUrl(infoBlock.image?.formats?.thumbnail?.url),
       headline: infoBlock.headline,
-      text: infoBlock.text[0].children[0].text,
+      //text: infoBlock.text[0].children[0].text,
+      text: renderParagraphContent(infoBlock.text),
       button: createInfoBlockButton(infoBlock.button)
   }))
 }
