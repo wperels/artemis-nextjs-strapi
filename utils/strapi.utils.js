@@ -39,22 +39,16 @@ export async function fetchDataFromStrapi(route) {
 }
 
 export function processInfoBlocks(data) {
-  if (!data || !data.info_blocks) return [];
-
-  return data.info_blocks.map((infoBlock) => ({
-    id: infoBlock.id,
-    documentId: infoBlock.documentId,
-    headline: infoBlock.headline,
-    text: renderParagraphContent(infoBlock.text),   // ✅ use existing helper, handles empty paras
-    showimageRight: infoBlock.showimageRight,
-    //imageSrc: getStrapiMediaUrl(infoBlock.image?.formats?.thumbnail?.url ?? infoBlock.image?.url),
-    imageSrc: getStrapiMediaUrl(
-      infoBlock.image?.formats?.large?.url ??
-      infoBlock.image?.formats?.medium?.url ??
-      infoBlock.image?.url
-    ),
-    button: createInfoBlockButton(infoBlock.button),
-  }));
+  const infoBlocksRaw = data.info_blocks
+  return infoBlocksRaw.map( (infoBlock) => ({
+      ...infoBlock, // ✅ was: ...infoBlock.attributes
+      id: infoBlock.id,
+      showimageRight: infoBlock.showimageRight,
+      imageSrc: getStrapiMediaUrl(infoBlock.image?.formats?.thumbnail?.url),
+      headline: infoBlock.headline,
+      text: infoBlock.text[0].children[0].text,
+      button: createInfoBlockButton(infoBlock.button)
+  }))
 }
 
 export function createInfoBlockButton(buttonData) {
@@ -67,45 +61,25 @@ export function createInfoBlockButton(buttonData) {
 }
 
 export async function fetchBlogArticles() {
-  const query = qs.stringify(
-    {
-      populate: {
-        featuredImage: true,
-        articleContent: {
-          populate: '*',
-        },
+  const query = qs.stringify({
+    populate: {
+      articleContent: {
+        populate: '*'
       },
-    },
-    { encodeValuesOnly: true }
+      featuredImage: {
+        populate: '*'
+      }
+    }
+  }, { encodeValuesOnly: true });
+
+  const blogData = await fetchDataFromStrapi(`blog-articles?${query}`);
+
+  const processBlogArticles = blogData.map(processBlogArticle);
+  processBlogArticles.sort(
+    (a, z) => new Date(z.publishedAt) - new Date(a.publishedAt)
   );
 
-  const url = `${BASE_URL}/api/blog-articles?${query}`;
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000);
-
-  try {
-    const response = await fetch(url, {
-      next: { revalidate: 300 },
-      signal: controller.signal,
-    });
-    clearTimeout(timeoutId);
-
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
-    const json = await response.json();
-    const blogData = json.data;
-
-    const processBlogArticles = blogData.map(processBlogArticle);
-    processBlogArticles.sort(
-      (a, z) => new Date(z.publishedAt) - new Date(a.publishedAt)
-    );
-
-    return processBlogArticles;
-
-  } catch (err) {
-    console.error('Failed to fetch blog articles:', err.message);
-    throw err;
-  }
+  return processBlogArticles;
 }
 
 function processBlogArticle(article) {
@@ -127,7 +101,7 @@ function processBlogArticle(article) {
 
 function processImageTextComponent(component) {
   return {
-    ...component.attributes,
+    ...component, // ✅ was: ...component.attributes
     id: component.id,
     paragraph: component.paragraph,
     imageCaption: component.imageCaption,
@@ -207,15 +181,11 @@ export async function fetchIndividualEvent(documentId) {
 }
 
 export function processEventData(event) {
-  const imageUrl =
-    event.attributes?.image?.data?.attributes?.url ||
-    event.image?.url ||
-    null;
-
-  const startingDate = event.attributes?.startingDate || event.startingDate;
+  const imageUrl = event.image?.url || null;
+  const startingDate = event.startingDate;
 
   return {
-    ...event.attributes,
+    ...event,
     id: event.id,
     documentId: event.documentId,
     name: event.name,
@@ -223,7 +193,7 @@ export function processEventData(event) {
     singlePrice: event.singlePrice,
     sharedPrice: event.sharedPrice,
     startingDate: startingDate,
-    image: getStrapiMediaUrl(imageUrl),
+    image: getStrapiMediaUrl(imageUrl)
   };
 }
 
