@@ -1,11 +1,12 @@
 import qs from 'qs';
 
 //const BASE_URL = process.env.STRAPI_URL || "http://127.0.0.1:1338";
+
 const BASE_URL =
   process.env.STRAPI_URL ||
   process.env.NEXT_PUBLIC_STRAPI_URL ||
-  process.env.NEXT_PUBLIC_STRAPI_API_URL ||
-  "https://artemis-nextjs-strapi-backend.onrender.com";
+  "https://wp-nextjs-strapi-backend.onrender.com";
+
 // Helper to check if URL is already complete (Cloudinary or external)
 export function getStrapiMediaUrl(url) {
   if (!url) return null;
