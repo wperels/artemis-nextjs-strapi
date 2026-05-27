@@ -7,7 +7,8 @@ export const revalidate = 300;
 export default async function Home() {
 
   const data = await fetchDataFromStrapi(
-    "infoblocks-experience2?populate[heroImage]=true&populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image"
+    //"infoblocks-experience2?populate[heroImage]=true&populate[info_blocks][populate][0]=button&populate[info_blocks][populate][1]=image"
+    "infoblocks-experience2?populate[heroImage]=true&populate[info_blocks][populate][button]=true&populate[info_blocks][populate][image]=true"
   )
   
   const infoBlockData = processInfoBlocks(data)
