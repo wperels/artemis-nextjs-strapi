@@ -49,7 +49,7 @@ export function processInfoBlocks(data) {
       ...infoBlock, // ✅ was: ...infoBlock.attributes
       id: infoBlock.id,
       showimageRight: infoBlock.showimageRight,
-      imageSrc: getStrapiMediaUrl(infoBlock.image?.formats?.thumbnail?.url),
+      imageSrc: getStrapiMediaUrl(infoBlock.image?.url),
       headline: infoBlock.headline,
       //text: infoBlock.text[0].children[0].text,
       text: renderParagraphContent(infoBlock.text),
