@@ -5,7 +5,8 @@ import qs from 'qs';
 const BASE_URL =
   process.env.STRAPI_URL ||
   process.env.NEXT_PUBLIC_STRAPI_URL ||
-  "https://wp-nextjs-strapi-backend.onrender.com";
+  //"https://wp-nextjs-strapi-backend.onrender.com";
+  "https://artemis-nextjs-strapi-backend.onrender.com";
 
 // Helper to check if URL is already complete (Cloudinary or external)
 export function getStrapiMediaUrl(url) {
