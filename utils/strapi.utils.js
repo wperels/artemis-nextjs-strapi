@@ -21,28 +21,29 @@ export function getStrapiMediaUrl(url) {
 
 export async function fetchDataFromStrapi(route) {
   const url = `${BASE_URL}/api/${route}`;
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-  try {
-    console.log(`Fetching from: ${url}`);
-    const response = await fetch(url, {
-      next: { revalidate: 300 },
-      signal: controller.signal,
-    });
-    clearTimeout(timeoutId);
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 60000);
 
-    if (!response.ok) {
-      console.error(`Status: ${response.status}`);
-      throw new Error(`HTTP error! status: ${response.status}`);
+    try {
+      console.log(`Fetching (attempt ${attempt}): ${url}`);
+      const response = await fetch(url, {
+        next: { revalidate: 300 },
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+      const json = await response.json();
+      return json.data;
+    } catch (err) {
+      clearTimeout(timeoutId);
+      console.error(`Attempt ${attempt} failed: ${err.message}`);
+      if (attempt === 2) throw new Error(`Failed to fetch data from: ${url}`);
+      await new Promise(res => setTimeout(res, 5000)); // wait 5s before retry
     }
-
-    const json = await response.json();
-    return json.data;
-  } catch (err) {
-    console.error(`Failed to fetch data from: ${url}`);
-    console.error(`Error message: ${err.message}`);
-    throw new Error(`Failed to fetch data from: ${url}`);
   }
 }
 
