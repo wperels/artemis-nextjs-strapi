@@ -10,6 +10,7 @@ const Header = () => {
   const navItems = [
     { display: "Launch System", slug: "/" },
     { display: "Why the Moon", slug: "/why-the-moon" },
+    { display: "Scavenger Hunt", slug: "/scavenger-hunt-landing" },
     { display: "The Missions", slug: "/missions" },
   ]
 
