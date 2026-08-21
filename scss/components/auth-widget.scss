@@ -1,0 +1,41 @@
+.auth-widget {
+  max-width: 40rem;
+  margin: 0 auto;
+
+  // ─── Toggle Buttons ─────────────────────────────────────────────────
+  & button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  &--signup {
+    & button:first-child {
+      text-decoration: underline;
+    }
+  }
+
+  &--signin {
+    & button:last-child {
+      text-decoration: underline;
+    }
+  }
+
+  // ─── Responsive: Phone ──────────────────────────────────────────────
+  @include respond(phone) {
+    max-width: 100%;
+  }
+}
+
+.auth-toggle {
+  margin-bottom: 2rem;
+  font-size: 1.4rem;
+  text-align: center;
+
+  // ─── Responsive: Small Phone ────────────────────────────────────────
+  @include respond(small-phone) {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+  }
+}

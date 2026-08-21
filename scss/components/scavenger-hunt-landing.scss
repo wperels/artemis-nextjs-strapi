@@ -1,0 +1,61 @@
+.scavenger-hunt {
+  max-width: 70rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 6rem var(--page-padding) 4rem;
+
+  // ─── Title ──────────────────────────────────────────────────────────
+  &__title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  // ─── Intro Copy ─────────────────────────────────────────────────────
+  &__intro {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  // ─── Steps List ─────────────────────────────────────────────────────
+  &__steps {
+    margin-bottom: 3rem;
+    padding-left: 2rem;
+    line-height: 1.8;
+  }
+
+  &__step {
+    margin-bottom: 0.5rem;
+  }
+
+  // ─── Auth Widget Wrapper ────────────────────────────────────────────
+  &__auth {
+    margin-top: 3rem;
+  }
+
+  // ─── Responsive: Tablet Landscape ───────────────────────────────────
+  @include respond(tab-land) {
+    padding: 4.5rem var(--page-padding) 3rem;
+  }
+
+  // ─── Responsive: Phone ──────────────────────────────────────────────
+  @include respond(phone) {
+    padding: 3rem var(--page-padding) 2.5rem;
+
+    &__steps {
+      padding-left: 1.5rem;
+    }
+  }
+
+  // ─── Responsive: Small Phone ────────────────────────────────────────
+  @include respond(small-phone) {
+    padding: 2.5rem var(--page-padding) 2rem;
+
+    &__title {
+      margin-bottom: 1rem;
+    }
+
+    &__intro {
+      margin-bottom: 1rem;
+    }
+  }
+}
