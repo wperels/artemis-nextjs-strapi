@@ -6,7 +6,7 @@ export default function ScavengerHuntLanding() {
     <section className="scavenger-hunt">
       <div className="scavenger-hunt__container">
         <div className="scavenger-hunt__intro">
-          <h2>To the Moon and Beyond Scavenger Hunt</h2>
+          <h2>Scavenger Hunt</h2>
           <p>
             Welcome to the To the Moon and Beyond Scavenger Hunt — a fun, family-friendly way to
             explore content, events, and places. Collect clues, solve puzzles,
