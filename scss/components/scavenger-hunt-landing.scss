@@ -4,6 +4,11 @@
   margin-right: auto;
   padding: 6rem var(--page-padding) 4rem;
 
+  h3 {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+  }
+
   // ─── Title ──────────────────────────────────────────────────────────
   &__title {
     margin-bottom: 1.5rem;
