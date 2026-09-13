@@ -41,7 +41,7 @@ export default function ScavengerHuntLanding() {
 
       <div className="scavenger-hunt__auth">
         <h3>Get started</h3>
-        <p classname="scavenger-hunt__step copy">Save your progress and view your badges — sign up or sign in now.</p>
+        <p className="scavenger-hunt__step copy">Save your progress and view your badges — sign up or sign in now.</p>
         <AuthWidget />
       </div>
     </section>

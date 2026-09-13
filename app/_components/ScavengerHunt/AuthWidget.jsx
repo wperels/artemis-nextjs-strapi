@@ -4,11 +4,13 @@
 import { useState } from 'react';
 import SigninForm from './signin-form';
 import SignupForm from './signup-form';
+import "./auth-tailwind.css";
 
 export default function AuthWidget() {
   const [mode, setMode] = useState('signup'); // default view
 
   return (
+    <div className="auth-widget-scope">
     <div className="flex flex-col items-center gap-4 py-8">
       {mode === 'signup' ? <SignupForm /> : <SigninForm />}
 
@@ -38,5 +40,6 @@ export default function AuthWidget() {
         )}
       </p>
     </div>
+  </div>
   );
 }
