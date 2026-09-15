@@ -1,6 +1,5 @@
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/preflight.css" layer(base);
 
 @layer utilities {
   .auth-widget-scope {
