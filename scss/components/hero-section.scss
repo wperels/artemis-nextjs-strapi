@@ -51,6 +51,14 @@
     &--turquoise {
       color: white;
     }
+
+    @include respond(small-phone) {
+      h1 {
+        font-size: 4.2rem;
+        line-height: 1.15;
+        margin-bottom: 0.4rem;
+      }
+    }
   }
 
   &__logo {
