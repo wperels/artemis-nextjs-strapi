@@ -10,11 +10,13 @@ const Header = () => {
   const navItems = [
     { display: "Launch System", slug: "/" },
     { display: "Why the Moon", slug: "/why-the-moon" },
+    { display: "Scavenger Hunt", slug: "/scavenger-hunt-landing" },
     { display: "The Missions", slug: "/missions" },
   ]
 
   return (
     <header className={`header ${path === "/why-the-moon" ? "header--light" : ""}`}>
+    {path !== "/techstack" && path !== "/about" && (
     <Link href="/">
       <img
         className="header__logo"
@@ -22,7 +24,7 @@ const Header = () => {
         alt="NASA Artemis program logo — return to homepage"
       />
     </Link>  
-
+    )}
       {/* Hamburger button — top right */}
       <button
         className={`header__hamburger ${menuOpen ? "header__hamburger--open" : ""}`}

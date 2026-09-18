@@ -1,6 +1,6 @@
 @import "./base/mixins.scss";
-@import "./base/variables.scss";
 @import "./base/typography.scss";
+@import "./base/variables.scss";
 @import "./base/base.scss";
 
 @import "./components/header";
@@ -9,8 +9,10 @@
 @import "./components/hero-section";
 @import "./components/info-block";
 @import "./components/input";
-@import "./components/static-page";
 @import "./components/featured-items";
+@import "./components/auth-widget";
+@import "./components/scavenger-hunt-landing";
+
 
 @import "./components/blog/highlight-article";
 @import "./components/blog/newsletter";
@@ -18,6 +20,8 @@
 @import "./components/blog/article-overview";
 @import "./components/blog/article-components";
 @import "./components/blog-preview";
+
+@import "./pages/static-page";
 
 @import "./components/events/signup-form";
 
