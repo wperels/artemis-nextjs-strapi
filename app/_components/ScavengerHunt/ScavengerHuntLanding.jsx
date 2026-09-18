@@ -4,16 +4,15 @@ import { MapPin, CheckCircle, Trophy } from "@phosphor-icons/react/dist/ssr";
 
 export default function ScavengerHuntLanding() {
   const howToSchema = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "How to Play the To the Moon and Beyond Scavenger Hunt",
-    "step": [
-      { "@type": "HowToStep", "text": "Sign up or sign in to create your hunt profile." },
-      { "@type": "HowToStep", "text": "Find clues in articles, at events, at museums, or on discovered websites." },
-      { "@type": "HowToStep", "text": "Submit answers to claim points and badges." },
-      { "@type": "HowToStep", "text": "Compare scores on the leaderboard and unlock rewards." }
-    ]
-  }
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Play Mankind's Journey Scavenger Hunt",
+  "step": [
+    { "@type": "HowToStep", "text": "Discover clues hidden in articles, at events, at museums, or on websites across the site." },
+    { "@type": "HowToStep", "text": "Submit your answers to claim points and unlock badges as you go." },
+    { "@type": "HowToStep", "text": "Compare scores with other hunters and unlock exclusive rewards." }
+  ]
+}
 
   return (
     <section className="scavenger-hunt">
@@ -31,14 +30,6 @@ export default function ScavengerHuntLanding() {
           and earn points as you progress.
         </p>
       </div>
-
-     {/*  <h3>How it works</h3>
-      <ol className="scavenger-hunt__steps copy">
-        <li className="scavenger-hunt__step copy">Sign up or sign in to create your hunt profile.</li>
-        <li className="scavenger-hunt__step">Find clues in articles, at events, at museums, or from websites.</li>
-        <li className="scavenger-hunt__step">Submit answers to claim points and badges.</li>
-        <li className="scavenger-hunt__step">Compare scores on the leaderboard and unlock rewards.</li>
-      </ol> */}
 
       <h3 className="scavenger-hunt__how-title">How it works</h3>
         <div className="scavenger-hunt__how-grid">
