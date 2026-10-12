@@ -21,11 +21,11 @@ export default function ScavengerHuntLanding() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
 
-      <h2 className="scavenger-hunt__title">Mankind's Journey Scavenger Hunt</h2>
+      <h2 className="scavenger-hunt__title">Scavenger Hunt</h2>
 
       <div className="scavenger-hunt__intro copy">
         <p>
-          Welcome to Mankind's Journey Scavenger Hunt — a fun, family-friendly way to
+          Welcome to Mankind's Journey to the Moon and Beyond Scavenger Hunt — a fun, family-friendly way to
           explore content, events, and places. Collect clues, solve puzzles,
           and earn points as you progress.
         </p>
