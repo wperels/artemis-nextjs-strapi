@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-const HeroSection = ({ imgSrc, heroAlt, headline, theme = "turquoise" }) => {
+const HeroSection = ({ imgSrc, heroAlt, headline, title, theme = "turquoise" }) => {
   return (
     <section className="hero">
       <div className="hero__background">
@@ -15,6 +15,7 @@ const HeroSection = ({ imgSrc, heroAlt, headline, theme = "turquoise" }) => {
         )}
       </div>
       <div className={`hero__headline hero__headline--${theme}`}>
+        {title && <h1 className="sr-only">{title}</h1>}
         {headline || <h1>headline missing</h1>}
       </div>
       <img

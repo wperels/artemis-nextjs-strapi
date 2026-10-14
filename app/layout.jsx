@@ -7,17 +7,26 @@ import { cn } from "@/lib/utils";
 
 const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3003'
+
 export const metadata = {
-  title: 'NASA Artemis',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'NASA Artemis',
+    template: '%s | NASA Artemis',
+  },
   description: 'Humanity\'s return to the Moon and journey to Mars.',
+  openGraph: {
+    siteName: 'NASA Artemis',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: { card: 'summary_large_image' },
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={cn("font-mono", jetbrainsMono.variable)}>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </head>
       <body suppressHydrationWarning>
         <Header />
         {children}
