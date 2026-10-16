@@ -39,6 +39,11 @@
     }
   }
 
+  &__copyright {
+    display: flex;
+    flex-direction: column;
+  }
+
   @include respond(tab-land) {
     padding: 4rem var(--page-padding) 3rem; // ← uses --page-padding
 
