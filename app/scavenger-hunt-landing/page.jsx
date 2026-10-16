@@ -11,7 +11,7 @@ export const metadata = {
     'Collect clues, solve puzzles, and earn points and badges in a family-friendly Artemis scavenger hunt across articles, events, and museums.',
   alternates: { canonical: '/scavenger-hunt-landing' },
   openGraph: {
-    title: "Mankind's Journey Scavenger Hunt | NASA Artemis",
+    title: "Mankind's Journey Scavenger Hunt | Artemis Moon Journey",
     description:
       'Collect clues, solve puzzles, and earn badges in the Artemis scavenger hunt.',
     url: '/scavenger-hunt-landing',

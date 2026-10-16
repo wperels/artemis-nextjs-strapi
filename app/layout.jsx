@@ -12,12 +12,12 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3003'
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'NASA Artemis',
-    template: '%s | NASA Artemis',
+    default: 'Artemis Moon Journey',
+    template: '%s | Artemis Moon Journey',
   },
   description: 'Humanity\'s return to the Moon and journey to Mars.',
   openGraph: {
-    siteName: 'NASA Artemis',
+    siteName: 'Artemis Moon Journey',
     type: 'website',
     locale: 'en_US',
   },
