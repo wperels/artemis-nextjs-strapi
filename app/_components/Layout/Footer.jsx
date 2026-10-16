@@ -50,7 +50,7 @@ const Footer = () => {
             </li>
           ))}
         </ul>
-        <div>
+        <div className="footer__copyright">
           <p className="copy">© Wendy Perelstein - all rights reserved</p>
           <p className="copy">Not affiliated with or endorsed by NASA</p>
         </div>

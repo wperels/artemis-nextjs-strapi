@@ -32,7 +32,7 @@ export default function SignupForm() {
 
   return (
     <form className="auth-card" action={formAction} onSubmit={handleSubmit}>
-      <h2 className="auth-card__title">Signup</h2>
+      <h4 className="auth-card__title">Sign up.</h4>
 
       <div className="auth-card__fields">
         <Input

@@ -1,6 +1,7 @@
 // app/scavenger-hunt-landing/page.jsx
 import HeroSection from './../_components/HeroSection'
 import ScavengerHuntLanding from '../_components/ScavengerHunt/ScavengerHuntLanding'
+import FaqSection from '../_components/ScavengerHunt/FaqSection'
 import { fetchDataFromStrapi, getStrapiMediaUrl } from '../../utils/strapi.utils'
 
 export const revalidate = 300;
@@ -11,7 +12,7 @@ export const metadata = {
     'Collect clues, solve puzzles, and earn points and badges in a family-friendly Artemis scavenger hunt across articles, events, and museums.',
   alternates: { canonical: '/scavenger-hunt-landing' },
   openGraph: {
-    title: "Mankind's Journey Scavenger Hunt | Artemis Moon Journey",
+    title: "Mankind's Journey Scavenger Hunt | NASA Artemis",
     description:
       'Collect clues, solve puzzles, and earn badges in the Artemis scavenger hunt.',
     url: '/scavenger-hunt-landing',
@@ -52,6 +53,7 @@ export default async function Page() {
         theme="turquoise"
       />
       <ScavengerHuntLanding />
+      <FaqSection />
     </main>
   )
 }
