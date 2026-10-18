@@ -53,10 +53,12 @@ export default function FaqSection() {
 
       <div className="faq__list">
         {faqs.map(({ question, answer }) => (
-          <div className="faq__item" key={question}>
-            <h3 className="faq__question">{question}</h3>
+          <details className="faq__item" key={question}>
+            <summary className="faq__summary">
+              <h3 className="faq__question">{question}</h3>
+            </summary>
             <p className="faq__answer copy">{answer}</p>
-          </div>
+          </details>
         ))}
       </div>
 
