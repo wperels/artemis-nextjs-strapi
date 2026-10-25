@@ -6,7 +6,7 @@ const Footer = () => {
     { display: "Why the Moon", slug: "/why-the-moon" },
     { display: "Scavenger Hunt", slug: "/scavenger-hunt-landing" },
     { display: "The Missions", slug: "/missions" },
-    { display: "NASA's Newsletter", slug: "/newsletter" },
+    { display: "Artemis Newsletter", slug: "/newsletter" },
   ]
 
   const policies = [
@@ -27,7 +27,7 @@ const Footer = () => {
             src="/assets/Artemis_program.svg"
             width={200}
             height={200}
-            alt="NASA Artemis program logo — return to homepage"
+            alt="Artemis Moon Journey — return to homepage"
           />
         </Link>
         <ul className="footer__links">
@@ -50,7 +50,10 @@ const Footer = () => {
             </li>
           ))}
         </ul>
-        <p className="copy">© Wendy Perelstein - all rights reserved</p>
+        <div className="footer__copyright">
+          <p className="copy">© Wendy Perelstein - all rights reserved</p>
+          <p className="copy">Not affiliated with or endorsed by NASA</p>
+        </div>
       </div>
     </footer>
   )

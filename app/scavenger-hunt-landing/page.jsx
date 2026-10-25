@@ -1,24 +1,37 @@
 // app/scavenger-hunt-landing/page.jsx
 import HeroSection from './../_components/HeroSection'
 import ScavengerHuntLanding from '../_components/ScavengerHunt/ScavengerHuntLanding'
+import FaqSection from '../_components/ScavengerHunt/FaqSection'
 import { fetchDataFromStrapi, getStrapiMediaUrl } from '../../utils/strapi.utils'
+import { pageMetadata } from '@/lib/site'
 
 export const revalidate = 300;
+
+export const metadata = pageMetadata({
+  title: "Mankind's Journey Scavenger Hunt",
+  description:
+    'Collect clues, solve puzzles, and earn points and badges in a family-friendly Artemis scavenger hunt across articles, events, and museums.',
+  shareDescription:
+    'Collect clues, solve puzzles, and earn badges in the Artemis scavenger hunt.',
+  path: '/scavenger-hunt-landing',
+})
 
 export default async function Page() {
   const data = await fetchDataFromStrapi(
     "infoblocks-scavenger-hunt-landing?populate[heroImage]=true"
   )
 
-const heroImageSrc = data?.heroImage?.url
-  ? getStrapiMediaUrl(data.heroImage.url)
-  : null
+  const heroImageSrc = data?.heroImage?.url
+    ? getStrapiMediaUrl(data.heroImage.url)
+    : null
 
-const heroAlt = data?.heroImage?.alternativeText || "Scavenger Hunt hero"
+  const heroAlt =
+    data?.heroImage?.alternativeText ||
+    "Orion spacecraft with the Moon and Earth in the background"
 
   const heroHeadline = data?.heroHeadline
     ? data.heroHeadline.split('|').map((line, i) => (
-        <h1 key={i}>{line}</h1>
+        <p key={i} className="hero__tagline">{line}</p>
       ))
     : null
 
@@ -28,9 +41,11 @@ const heroAlt = data?.heroImage?.alternativeText || "Scavenger Hunt hero"
         imgSrc={heroImageSrc}
         heroAlt={heroAlt}
         headline={heroHeadline}
+        //title="Mankind's journey scavenger hunt"
         theme="turquoise"
       />
       <ScavengerHuntLanding />
+      <FaqSection />
     </main>
   )
 }

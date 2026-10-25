@@ -1,0 +1,116 @@
+.faq {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 2rem var(--page-padding) 10rem;
+
+  &__title {
+    font-size: 4.8rem;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 4rem;
+
+    @include respond(phone) {
+      font-size: 3.6rem;
+      margin-bottom: 3rem;
+    }
+
+    @include respond(small-phone) {
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__list {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  &__item {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-left: 0.5rem solid $turquoise;
+    border-radius: 1.2rem;
+    box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 0.6rem 1.6rem rgba(0, 0, 0, 0.1);
+    }
+
+    &[open] .faq__summary::after {
+      transform: rotate(45deg);
+    }
+  }
+
+  &__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2.2rem 2.8rem;
+    cursor: pointer;
+    list-style: none;
+    border-radius: 1.2rem;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: "+";
+      flex-shrink: 0;
+      font-size: 3.2rem;
+      line-height: 1;
+      color: $turquoise;
+      transition: transform 0.2s ease;
+    }
+
+    &:focus-visible {
+      outline: 0.3rem solid $turquoise;
+      outline-offset: -0.3rem;
+    }
+
+    @include respond(small-phone) {
+      padding: 1.6rem 1.8rem;
+    }
+  }
+
+  &__question {
+    margin: 0;
+    font-size: 2.2rem;
+    line-height: 1.35;
+
+    @include respond(small-phone) {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__answer {
+    margin: 0;
+    padding: 0 2.8rem 2.4rem;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: #555;
+
+    @include respond(small-phone) {
+      padding: 0 1.8rem 1.8rem;
+    }
+  }
+
+  &__more {
+    margin-top: 4rem;
+    text-align: center;
+    font-size: 1.6rem;
+    line-height: 1.6;
+
+    a {
+      color: $turquoise;
+      text-decoration: underline;
+      text-underline-offset: 0.3rem;
+
+      &:hover {
+        text-decoration-thickness: 0.2rem;
+      }
+    }
+  }
+}

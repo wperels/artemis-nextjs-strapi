@@ -21,7 +21,7 @@ const Header = () => {
       <img
         className="header__logo"
         src="/assets/Artemis_program.svg"
-        alt="NASA Artemis program logo — return to homepage"
+        alt="Artemis Moon Journey — return to homepage"
       />
     </Link>  
     )}
@@ -53,7 +53,7 @@ const Header = () => {
           ))}
         </ul>
           <Link href="/newsletter" onClick={() => setMenuOpen(false)}>
-            <button className="btn btn--black btn--small">NASA's Newsletter</button>
+            <button className="btn btn--black btn--small">Artemis Newsletter</button>
           </Link>
       </nav>
 
