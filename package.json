@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/wake-strapi.js",
+    "prebuild": "node scripts/check-brand.js && node scripts/wake-strapi.js",
     "dev": "next dev -p 3003",
     "build": "next build",
     "start": "next start -p 3003",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check:brand": "node scripts/check-brand.js",
+    "predev": "node scripts/check-brand.js"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

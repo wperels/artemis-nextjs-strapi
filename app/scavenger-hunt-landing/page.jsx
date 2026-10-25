@@ -3,26 +3,18 @@ import HeroSection from './../_components/HeroSection'
 import ScavengerHuntLanding from '../_components/ScavengerHunt/ScavengerHuntLanding'
 import FaqSection from '../_components/ScavengerHunt/FaqSection'
 import { fetchDataFromStrapi, getStrapiMediaUrl } from '../../utils/strapi.utils'
+import { pageMetadata } from '@/lib/site'
 
 export const revalidate = 300;
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Mankind's Journey Scavenger Hunt",
   description:
     'Collect clues, solve puzzles, and earn points and badges in a family-friendly Artemis scavenger hunt across articles, events, and museums.',
-  alternates: { canonical: '/scavenger-hunt-landing' },
-  openGraph: {
-    title: "Mankind's Journey Scavenger Hunt | NASA Artemis",
-    description:
-      'Collect clues, solve puzzles, and earn badges in the Artemis scavenger hunt.',
-    url: '/scavenger-hunt-landing',
-    type: 'website',
-  },
-  twitter: {
-    title: "Mankind's Journey Scavenger Hunt",
-    description: 'Collect clues, solve puzzles, and earn badges.',
-  },
-}
+  shareDescription:
+    'Collect clues, solve puzzles, and earn badges in the Artemis scavenger hunt.',
+  path: '/scavenger-hunt-landing',
+})
 
 export default async function Page() {
   const data = await fetchDataFromStrapi(
@@ -49,7 +41,7 @@ export default async function Page() {
         imgSrc={heroImageSrc}
         heroAlt={heroAlt}
         headline={heroHeadline}
-        title="Mankind's journey scavenger hunt"
+        //title="Mankind's journey scavenger hunt"
         theme="turquoise"
       />
       <ScavengerHuntLanding />
